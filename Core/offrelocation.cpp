@@ -9,3 +9,12 @@ OffreLocation::OffreLocation(Trottinette* trotti, double prix,
            m_Lieux[i] = lieux[i];
     }
 }
+
+ OffreLocation::OffreLocation(const OffreLocation& other) :
+     m_Trottinette(other.m_Trottinette), m_PrixCaution(other.m_PrixCaution)
+ {
+     for(int  i = 0; i <= OffreLocation::FIN_INDEX; i++){
+            m_Dates[i] = std::move(other.m_Dates[i]);
+            m_Lieux[i] = std::move(other.m_Lieux[i]);
+     }
+ }
