@@ -11,8 +11,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    /* MainWindow w;
-    w.show();*/
+    MainWindow w;
+    w.show();
     Utilisateur user;
     OffreLocation& offre = user.ajouterOffre();
     offre.SetTrottinette(new Trottinette("XFVZ526", 12, "Bonne Etat"));
