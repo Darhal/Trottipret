@@ -10,6 +10,8 @@ class OffreLocation
 public:
     OffreLocation(){}
 
+    OffreLocation(const OffreLocation& other);
+
     OffreLocation(Trottinette* trotti, double prix, const QDateTime dates[2], const QString lieux[2]);
 
     inline void SetTrottinette(Trottinette* t) { m_Trottinette = t; }

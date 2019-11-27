@@ -30,7 +30,9 @@ SOURCES += \
     Core/proprietaire.cpp \
     Core/offrelocation.cpp \
     Core/utilisateur.cpp \
-    Core/trottinette.cpp
+    Core/trottinette.cpp \
+    Core/locationmanager.cpp \
+    View/viewoffrelocation.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,7 +40,9 @@ HEADERS += \
     Core/proprietaire.h \
     Core/offrelocation.h \
     Core/utilisateur.h \
-    Core/trottinette.h
+    Core/trottinette.h \
+    Core/locationmanager.h \
+    View/viewoffrelocation.h
 
 FORMS += \
         mainwindow.ui
