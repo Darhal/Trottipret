@@ -32,7 +32,9 @@ SOURCES += \
     Core/utilisateur.cpp \
     Core/trottinette.cpp \
     Core/locationmanager.cpp \
-    View/viewoffrelocation.cpp
+    View/viewoffrelocation.cpp \
+    View/viewoffrelocation.cpp \
+    View/viewinscription.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +44,11 @@ HEADERS += \
     Core/utilisateur.h \
     Core/trottinette.h \
     Core/locationmanager.h \
-    View/viewoffrelocation.h
+    View/viewoffrelocation.h \
+    View/viewoffrelocation.h \
+    View/viewinscription.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    View/viewoffrelocation.ui \
+    View/viewinscription.ui

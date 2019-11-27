@@ -1,17 +1,14 @@
 #include "viewoffrelocation.h"
-#include "Core/locationmanager.h"
+#include "ui_viewoffrelocation.h"
 
-ViewOffreLocation::ViewOffreLocation(QWidget* parent) :
-    QDialog(parent)
+ViewOffreLocation::ViewOffreLocation(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::ViewOffreLocation)
 {
-    this->setBaseSize(256, 256);
+    ui->setupUi(this);
 }
 
-void ViewOffreLocation::OnAjouterOffre()
+ViewOffreLocation::~ViewOffreLocation()
 {
-    // TODO: Get fields from text fields
-
-    // Get the singelton and create the offer.
-    LocationManager& loc_manager = LocationManager::GetInstance();
-    // loc_manager.AjouterOffreLocation(Utilisateur(), OffreLocation());
+    delete ui;
 }
