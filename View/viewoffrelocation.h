@@ -3,16 +3,20 @@
 
 #include <QDialog>
 
+namespace Ui {
+class ViewOffreLocation;
+}
+
 class ViewOffreLocation : public QDialog
 {
     Q_OBJECT
+
 public:
-    explicit ViewOffreLocation(QWidget* parent = nullptr);
+    explicit ViewOffreLocation(QWidget *parent = 0);
+    ~ViewOffreLocation();
 
-    void OnAjouterOffre();
-signals:
-
-public slots:
+private:
+    Ui::ViewOffreLocation* ui;
 };
 
 #endif // VIEWOFFRELOCATION_H
