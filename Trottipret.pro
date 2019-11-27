@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -33,8 +33,8 @@ SOURCES += \
     Core/trottinette.cpp \
     Core/locationmanager.cpp \
     View/viewoffrelocation.cpp \
-    View/viewoffrelocation.cpp \
-    View/viewinscription.cpp
+    View/viewinscription.cpp \
+    Core/databasemanager.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,8 +45,8 @@ HEADERS += \
     Core/trottinette.h \
     Core/locationmanager.h \
     View/viewoffrelocation.h \
-    View/viewoffrelocation.h \
-    View/viewinscription.h
+    View/viewinscription.h \
+    Core/databasemanager.h
 
 FORMS += \
         mainwindow.ui \
