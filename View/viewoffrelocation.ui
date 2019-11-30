@@ -7,17 +7,17 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>353</height>
+    <height>431</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Ajouter une offre</string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>320</y>
+     <y>390</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -35,7 +35,7 @@
      <x>10</x>
      <y>10</y>
      <width>381</width>
-     <height>101</height>
+     <height>171</height>
     </rect>
    </property>
    <property name="title">
@@ -54,7 +54,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Model: </string>
+        <string>Modèle : </string>
        </property>
       </widget>
      </item>
@@ -76,7 +76,7 @@
      <item>
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Reference:</string>
+        <string>Référence : </string>
        </property>
       </widget>
      </item>
@@ -85,12 +85,81 @@
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_6">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>361</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_8">
+     <item>
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>Etat de la trottinette : </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox">
+       <item>
+        <property name="text">
+         <string>Neuve</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Bon état</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Etat moyen</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Mauvais état</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_7">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>361</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_9">
+     <item>
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>Photo :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="text">
+        <string>Choisir une Photo</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>120</y>
+     <y>190</y>
      <width>381</width>
      <height>191</height>
     </rect>
@@ -111,7 +180,7 @@
      <item>
       <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>Lieu retrait:</string>
+        <string>Lieu de retrait :</string>
        </property>
       </widget>
      </item>
@@ -133,7 +202,7 @@
      <item>
       <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>Lieu de depot:</string>
+        <string>Lieu de retour :</string>
        </property>
       </widget>
      </item>
@@ -155,12 +224,56 @@
      <item>
       <widget class="QLabel" name="label_5">
        <property name="text">
-        <string>Date retrait:</string>
+        <string>Date de retrait :</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLineEdit" name="lineEdit_5"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_8">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>120</y>
+      <width>361</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_10">
+     <item>
+      <widget class="QLabel" name="label_9">
+       <property name="text">
+        <string>Date de retour :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_8"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget_9">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>361</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_11">
+     <item>
+      <widget class="QLabel" name="label_10">
+       <property name="text">
+        <string>Prix Caution :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_9"/>
      </item>
     </layout>
    </widget>

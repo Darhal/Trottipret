@@ -8,6 +8,8 @@ class DatabaseManager
 public:
     static DatabaseManager& GetInstance();
 
+    void InitilizeDatabase();
+
     QSqlQuery Exec(const char* statment);
 
     template<typename... Args>

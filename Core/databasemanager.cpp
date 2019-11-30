@@ -11,6 +11,18 @@ DatabaseManager& DatabaseManager::GetInstance()
     return *s_Instance;
 }
 
+void DatabaseManager::InitilizeDatabase()
+{
+    this->Exec(
+        "CREATE TABLE IF NOT EXISTS USER "
+        "(identifiant varchar(8) PRIMARY KEY, "
+        "nom varchar(20), "
+        "prenom varchar(20), "
+        "email varchar(64)),"
+        "motdepass varchar(64)"
+   );
+}
+
 DatabaseManager::DatabaseManager() : db(QSqlDatabase::addDatabase("QSQLITE"))
 {
     db.setHostName("localhost");
