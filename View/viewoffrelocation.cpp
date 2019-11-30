@@ -1,6 +1,7 @@
 #include "viewoffrelocation.h"
 #include "ui_viewoffrelocation.h"
 
+// Constructeur
 ViewOffreLocation::ViewOffreLocation(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ViewOffreLocation)
@@ -8,6 +9,7 @@ ViewOffreLocation::ViewOffreLocation(QWidget *parent) :
     ui->setupUi(this);
 }
 
+// Destrcuteur
 ViewOffreLocation::~ViewOffreLocation()
 {
     delete ui;

@@ -10,23 +10,32 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+    ui->setupUi(this); // intilaize le UI
 
-    signalMapper  = new QSignalMapper{ this }; // liberation dans le destructeur
+    signalMapper  = new QSignalMapper{ this }; // Allocation dynamique de mon signal mapper
+                                               // Ceci devrait être strictement alloué dynamiquement
+                                               // sinon rien ne fonctionnera!
+
+    // Attcher nos buttons a la map on event clicked()
     connect(ui->InscriptionButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
     connect(ui->ConnectionButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
     connect(ui->OffreLocationButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
+
+     // Intilaizer nos buttons avec leur attribus.
     signalMapper->setMapping(ui->InscriptionButton, DialogWindow::SIGNUP);
     signalMapper->setMapping(ui->ConnectionButton, DialogWindow::LOGIN);
     signalMapper->setMapping(ui->OffreLocationButton, DialogWindow::OFFRE_LOCATION);
+
+    // Connecter notre signalMap.
     connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(OpenDialogWindow(int)));
 }
 
 void MainWindow::OpenDialogWindow(int dialog_id)
 {
+    // On utilise les advantage de l'heritage ici pour eviter la duplication du code
     QDialog* dialog_wnd = NULL;
 
-    switch(dialog_id)
+    switch(dialog_id) // switch qui decide le type de la fenetre en fonction de l'argument
     {
     case DialogWindow::SIGNUP:
         dialog_wnd = new ViewInscription(this);
@@ -41,14 +50,15 @@ void MainWindow::OpenDialogWindow(int dialog_id)
         return;
     }
 
-    dialog_wnd->setAttribute(Qt::WA_DeleteOnClose); // Libere la memoire automatiquement a la fermuture
-    dialog_wnd->show();
+    dialog_wnd->setAttribute(Qt::WA_DeleteOnClose); // Il y a pas de free (delete).
+                                                    // Ca va liberer la memoire automatiquement
+                                                    // a la fermuture
+    dialog_wnd->show(); // Afficher notre boite de dialogues.
 }
-
-
 
 MainWindow::~MainWindow()
 {
+    // Free de l'UI et le signalMapper
     delete ui;
     delete signalMapper;
 }

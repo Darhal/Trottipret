@@ -10,10 +10,13 @@
 #include "Core/databasemanager.h"
 #include <qdir.h>
 
+/*
+* Fonction principale l'exécution du programme commencera à partir d'ici
+*/
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    return a.exec();;
+    QApplication a(argc, argv); // QApplication
+    MainWindow w; // Constructeur par défaut et allouer statiquement notre MainWindow
+    w.show(); // Appelez son show
+    return a.exec(); // retourne a.exec();
 }
