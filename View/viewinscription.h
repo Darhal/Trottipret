@@ -17,6 +17,7 @@ public:
     ~ViewInscription();
     bool VerifySignupInformations();
 
+    void FinishSignup();
 private slots:
     void on_buttonBox_accepted();
     void accept() override;

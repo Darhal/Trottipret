@@ -1,5 +1,6 @@
 #include "databasemanager.h"
 #include <qdir.h>
+#include <QDebug>
 
 DatabaseManager* DatabaseManager::s_Instance = nullptr;
 
@@ -14,13 +15,14 @@ DatabaseManager& DatabaseManager::GetInstance()
 void DatabaseManager::InitilizeDatabase()
 {
     this->Exec(
-        "CREATE TABLE IF NOT EXISTS USER "
-        "(identifiant varchar(8) PRIMARY KEY, "
+        "CREATE TABLE IF NOT EXISTS utilisateurs"
+        "(identifiant TEXT PRIMARY KEY, "
         "nom varchar(20), "
         "prenom varchar(20), "
-        "email varchar(64)),"
+        "email varchar(64),"
         "motdepass varchar(64)"
-   );
+        ");"
+    );
 }
 
 DatabaseManager::DatabaseManager() : db(QSqlDatabase::addDatabase("QSQLITE"))
@@ -33,6 +35,7 @@ DatabaseManager::DatabaseManager() : db(QSqlDatabase::addDatabase("QSQLITE"))
     db.setDatabaseName(DB_PATH);
     db.open();
     query = QSqlQuery(db);
+    this->InitilizeDatabase();
 }
 
 QSqlQuery DatabaseManager::Exec(const char* statment)

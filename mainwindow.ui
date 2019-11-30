@@ -18,16 +18,36 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>0</y>
+      <y>10</y>
       <width>381</width>
-      <height>231</height>
+      <height>221</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
+      <widget class="QLabel" name="connected_user">
+       <property name="styleSheet">
+        <string notr="true">color:red;</string>
+       </property>
+       <property name="text">
+        <string>Utilisateur Anonyme, vous n'êtes pas connecté.</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="InscriptionButton">
        <property name="text">
         <string>Inscription</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ConnectionButton">
+       <property name="text">
+        <string>identifiez-vous</string>
        </property>
       </widget>
      </item>
