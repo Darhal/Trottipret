@@ -2,5 +2,5 @@
 
 Proprietaire::Proprietaire()
 {
-
+    // ctor vide
 }

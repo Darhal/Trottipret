@@ -7,13 +7,28 @@ namespace Ui {
 class ViewOffreLocation;
 }
 
+
+/**
+ * @class ViewOffreLocation
+ * @brief Classe qui represente la boite de Dialogue d'offre de location
+ * Elle herite de QDialog
+*/
 class ViewOffreLocation : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit ViewOffreLocation(QWidget *parent = 0);
-    ~ViewOffreLocation();
+    /**
+     * @fn Constructeur de ViewOffreLocation
+     * @param  QWidget* parent
+     * @return rien
+    */
+    explicit ViewOffreLocation(QWidget *parent = 0); // constructeur
+
+    /**
+     * @fn Destructor de ViewOffreLocation
+    */
+    ~ViewOffreLocation(); //destructeur
 
 private:
     Ui::ViewOffreLocation* ui;

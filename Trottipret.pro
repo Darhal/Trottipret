@@ -34,7 +34,8 @@ SOURCES += \
     Core/locationmanager.cpp \
     View/viewoffrelocation.cpp \
     View/viewinscription.cpp \
-    Core/databasemanager.cpp
+    Core/databasemanager.cpp \
+    View/viewconnection.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -46,9 +47,11 @@ HEADERS += \
     Core/locationmanager.h \
     View/viewoffrelocation.h \
     View/viewinscription.h \
-    Core/databasemanager.h
+    Core/databasemanager.h \
+    View/viewconnection.h
 
 FORMS += \
         mainwindow.ui \
     View/viewoffrelocation.ui \
-    View/viewinscription.ui
+    View/viewinscription.ui \
+    View/viewconnection.ui
