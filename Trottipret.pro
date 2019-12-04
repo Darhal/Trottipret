@@ -24,6 +24,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
+    View/viewlisteoffre.cpp \
         main.cpp \
     mainwindow.cpp \
     Core/core.cpp \
@@ -38,6 +39,7 @@ SOURCES += \
     View/viewconnection.cpp
 
 HEADERS += \
+    View/viewlisteoffre.h \
         mainwindow.h \
     Core/core.h \
     Core/proprietaire.h \
@@ -51,6 +53,7 @@ HEADERS += \
     View/viewconnection.h
 
 FORMS += \
+    View/viewlisteoffre.ui \
         mainwindow.ui \
     View/viewoffrelocation.ui \
     View/viewinscription.ui \
