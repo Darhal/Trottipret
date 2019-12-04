@@ -9,7 +9,7 @@ ViewOffreLocation::ViewOffreLocation(QWidget *parent) :
     ui->setupUi(this);
 }
 
-// Destrcuteur
+// Destructeur
 ViewOffreLocation::~ViewOffreLocation()
 {
     delete ui;

@@ -7,31 +7,49 @@ namespace Ui {
 class ViewConnection;
 }
 
-/*
- * Classe qui represente la boite de Dialogue de login
- * Ca herite de QDialog
+
+/**
+ * @class ViewConnection
+ * @brief Classe qui represente la boite de Dialogue de login
+ * Elle herite de QDialog
 */
 class ViewConnection : public QDialog
 {
     Q_OBJECT
 
 public:
-    // Constructeur
+    /**
+     * @fn Constructeur de ViewOffreLocation
+     * @param  QWidget* parent
+     * @return rien
+    */
     explicit ViewConnection(QWidget *parent = 0);
 
-    // Fonction qui verifie les informations de login
+    /**
+     * @fn Fonction qui verifie les informations de login
+     * @return bool
+    */
     bool VerifyLoginInformations();
 
-    // Fonction qui effectue le login
+    /**
+     * @fn Fonction qui effectue le login
+    */
     void FinishLogin();
 
-    // Destructeur
+    /**
+     * @fn Destructeur
+    */
     ~ViewConnection();
 
 private slots:
-    void accept() override; // les slots on surcharge la fonction accept pour ne pas
-                            // supprimer la fentre lorsque les
-                            // identifiants ne sont pas bon
+    /**
+     * @fn accept
+     * @brief les slots, on surcharge la fonction accept pour ne pas
+     * supprimer la fenêtre lorsque les
+     * identifiants ne sont pas bons
+     * @return void
+    */
+    void accept() override;
 
 private:
     Ui::ViewConnection *ui;

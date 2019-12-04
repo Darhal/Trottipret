@@ -2,11 +2,11 @@
 #include <qdir.h>
 #include <QDebug>
 
-// Intilization de notre variable statique, il faut que ce soit obligatoirement dans le .cpp
-// D'apres touts les standards C++!
+// Initialisation de notre variable statique, il faut que ce soit obligatoirement dans le .cpp
+// D'apres tous les standards C++
 DatabaseManager* DatabaseManager::s_Instance = nullptr;
 
-// Fonction statique qui va retourner l'instance de notre singelton
+// Fonction statique qui va retourner l'instance de notre singleton
 DatabaseManager& DatabaseManager::GetInstance()
 {
     if (!s_Instance) //  si c'est null
@@ -17,7 +17,7 @@ DatabaseManager& DatabaseManager::GetInstance()
 
 void DatabaseManager::InitilizeDatabase()
 {
-    // pour le moment on va cree un table d'utilisateur si ca n'existe pas!
+    // pour le moment on va creer une table d'utilisateur si elle n'existe pas
     this->Exec(
         "CREATE TABLE IF NOT EXISTS utilisateurs"
         "(identifiant TEXT PRIMARY KEY, "
@@ -31,19 +31,19 @@ void DatabaseManager::InitilizeDatabase()
 
 DatabaseManager::DatabaseManager() : db(QSqlDatabase::addDatabase("QSQLITE"))
 {
-    // Une databse local
+    // Une database locale
     db.setHostName("localhost");
     QFile file(DB_PATH);
-    file.open(QIODevice::ReadWrite); // creation du fichier sqlite si ca n'existe pas!
+    file.open(QIODevice::ReadWrite); // creation du fichier sqlite s'il n'existe pas
     file.close();
 
     db.setDatabaseName(DB_PATH);
     db.open(); // ouverture de db
-    query = QSqlQuery(db); //  intilization du query une foix pour toute
-    this->InitilizeDatabase(); // intilization de notre db
+    query = QSqlQuery(db); //  intilialisation du query
+    this->InitilizeDatabase(); // intitialisation de notre db
 }
 
-// FOnction qui execute une requetes sans arguments
+// Fonction qui execute une requete sans arguments
 QSqlQuery DatabaseManager::Exec(const char* statment)
 {
     query.clear();

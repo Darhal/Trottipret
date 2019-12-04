@@ -7,8 +7,9 @@ namespace Ui {
     class MainWindow;
 }
 
-/*
- * Classe MainWIndow qui possède l'interface utilisateur de la fenêtre principale
+/**
+ * @class MainWindow
+ * @brief Classe MainWIndow qui possède l'interface utilisateur de la fenêtre principale
  * et hérite de QMainWindow
 */
 class MainWindow : public QMainWindow
@@ -17,8 +18,8 @@ class MainWindow : public QMainWindow
 
 public:
 
-    /*
-     * Enum à utiliser plus tard pour résumer une fonction
+    /**
+     * @enum Enum à utiliser plus tard pour résumer une fonction
      * qui ouvrira des boîtes de dialogue
     */
     enum DialogWindow
@@ -28,18 +29,32 @@ public:
         OFFRE_LOCATION = 0x2,
     };
 
-    // Constructeur de la fenêtre principale
+    /**
+     * @fn Constructeur de la fenêtre principale
+     * @param  QWidget* parent
+     * @return rien
+    */
     explicit MainWindow(QWidget *parent = 0);
 
-    // Destructeur de la fenêtre principale
+    /**
+     * Destructeur de la fenêtre principale
+    */
     ~MainWindow();
 
-    // Fonction utile a recuperer les elements d'UI de la fenetre principale
-    // par les autres classes pour faciliter ses modifications.
+    /**
+     * @brief Fonction utile pour recuperer les elements d'UI de la fenetre principale
+     * par les autres classes pour faciliter ses modifications.
+     * @param  QWidget* parent
+     * @return rien
+    */
     Ui::MainWindow* GetUI() {return ui;}
 
 private slots:
-    // Fonction pour ouvrir les boîtes de dialogue
+    /**
+     * @brief Fonction pour ouvrir les boîtes de dialogue
+     * @param  QWidget* parent
+     * @return rien
+    */
     void OpenDialogWindow(int dialog_id);
 
 private:

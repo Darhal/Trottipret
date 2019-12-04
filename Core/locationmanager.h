@@ -6,19 +6,30 @@
 #include "Core/offrelocation.h"
 
 
-/*
-Classe LocationManager qui gère les propositions de location et son modèle de conception SIngelton
+/**
+* @class LocationManager
+* @brief Classe LocationManager qui gère les propositions de location et son modèle de conception Singleton
 */
 class LocationManager
 {
 public:
-    // Recuperer l'instance
+    /**
+     * @fn GetInstance
+     * @brief Fonction statique qui va retourner l'instance de notre singleton
+     * @return LocationManager&
+    */
     static LocationManager& GetInstance();
 
-    // Pour ajouter les offre de location a un user
+    /**
+     * @fn AjouterOffreLocation
+     * @brief Pour ajouter les offres de location à un utilisateur
+     * @param Utilisateur& user 
+     * @param const OffreLocation& offre
+     * @return void
+    */
     void AjouterOffreLocation(Utilisateur& user, const OffreLocation& offre);
 private:
-    static LocationManager s_Instance; // Note instance
+    static LocationManager s_Instance; // Notre instance
 
     LocationManager(); // Constructeur privé
 };

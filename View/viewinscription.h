@@ -8,25 +8,52 @@ namespace Ui {
 class ViewInscription;
 }
 
-/*
- * Classe qui represente la boite de Dialogue d'inscription
- * Ca herite de QDialog
+
+/**
+ * @class ViewInscription
+ * @brief Classe qui represente la boite de Dialogue d'inscription
+ * Elle herite de QDialog
 */
 class ViewInscription : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit ViewInscription(QWidget *parent = 0); // constructeur
-    ~ViewInscription(); // destrcuteur
-    bool VerifySignupInformations(); // verification des donnes de l'inscription
+    /**
+     * @fn Constructeur de ViewInscription
+     * @param  QWidget* parent
+     * @return rien
+    */
+    explicit ViewInscription(QWidget *parent = nullptr);
+    
+    /**
+     * @fn Destructeur de ViewInscription
+    */
 
-    void FinishSignup(); // faire l'inscription
+    ~ViewInscription();
+
+    /**
+     * @fn VerifySignupInformations
+     * @brief verification des donnees de l'inscription
+     * @return bool
+    */
+    bool VerifySignupInformations();
+
+    /**
+     * @fn FinishSignup
+     * @brief  faire l'inscription
+    */
+    void FinishSignup();
 private slots:
     void on_buttonBox_accepted();
-    void accept() override; // les slots on surcharge la fonction accept pour ne pas
-                            // supprimer la fentre lorsque les
-                            // informations ne sont pas bon
+
+    /**
+     * @fn accept
+     * @brief  les slots, on surcharge la fonction accept pour ne pas
+     * supprimer la fenêtre lorsque les
+     * informations ne sont pas bonnes
+    */
+    void accept() override; 
 
 private:
     Ui::ViewInscription *ui;

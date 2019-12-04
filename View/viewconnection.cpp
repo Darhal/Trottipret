@@ -6,7 +6,7 @@
 #include <Core/databasemanager.h>
 #include "mainwindow.h"
 
-// COnstructeur generer par Qt
+// Constructeur generé par Qt
 ViewConnection::ViewConnection(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ViewConnection)
@@ -17,12 +17,12 @@ ViewConnection::ViewConnection(QWidget *parent) :
 bool ViewConnection::VerifyLoginInformations()
 {
     QString idf = ui->identifiant->text(); // recupere l'identifiant
-    QString mdp = ui->mdp->text(); // recupere le mot de pass
-    // effectuer une requête de base de données en utilisant l'identifiant fourni
+    QString mdp = ui->mdp->text(); // recupere le mot de passe
+    // Effectue une requête de base de données en utilisant l'identifiant fourni
     QSqlQuery r = DatabaseManager::GetInstance()
             .Exec("SELECT * FROM utilisateurs WHERE identifiant='%s';", idf.toLocal8Bit().constData());
 
-    if (r.next()){ // si il ya des resultat
+    if (r.next()){ // S'il ya des resultats
         // Nous allons hacher le mot de passe donné par l'utilisateur à l'aide de l'algorithme sha256,
         // contrairement à md5 et à d'autres algorithmes hérités, qui n'ont pas de collision
         // connue jusqu'à aujourd'hui et qui sont difficiles à résoudre.
@@ -30,8 +30,8 @@ bool ViewConnection::VerifyLoginInformations()
                                                               QCryptographicHash::Sha256).toHex());
 
         // Nous comparons directement le mot de passe haché donné avec celui de la base de données.
-        // Nous ne stockons pas les mots de passe en texte brut dans notre base de données,
-        // ce qui en fait de bonnes mesures de sécurité, ce qui rendra plus difficile
+        // Nous ne stockons pas les mots de passes en texte brut dans notre base de données,
+        // ce qui en fait une bonne mesure de sécurité, ce qui rendra plus difficile
         // la tâche des pirates informatiques
         if (mdp_hashed == r.value(4).toString()){
             return true; // connexion réussie :)
@@ -40,7 +40,7 @@ bool ViewConnection::VerifyLoginInformations()
             ui->warning->setText("Mot de passe incorrect.");
             return false;
         }
-    }else{ // sinon (il ya pas de resultat, afficher l'erreur et retourne false)
+    }else{ // sinon (il ya pas de resultat, affiche l'erreur et retourne false)
         ui->warning->setText("L'utilisateur que vous avez fourni n'existe pas.");
         return false;
     }
@@ -53,7 +53,7 @@ void ViewConnection::FinishLogin()
     // Cette fonction est appelée uniquement après avoir vérifié les informations de connexion,
     // donc pas besoin de revérifier
 
-    QString idf = ui->identifiant->text(); // recupre l'identifiant
+    QString idf = ui->identifiant->text(); // recupere l'identifiant
 
     // Affiche une petite fenêtre informant l'utilisateur qu'il s'est connecté avec succès
     QMessageBox::information(
@@ -62,8 +62,8 @@ void ViewConnection::FinishLogin()
         QString("Bienvenue %1, vous êtes maintenant connecté.").arg(idf)
     );
 
-    QDialog::accept(); // fermer la fentre de dialog
-    // Recupere le label de main window et changer le en vert et avec l'identifant de l'utilistauer actuel
+    QDialog::accept(); // ferme la fenêtre de dialog
+    // Recupere le label de main window et le change en vert avec l'identifant de l'utilistauer actuel
     QLabel* user = ((MainWindow*)(this->parent()))->GetUI()->connected_user;
     user->setStyleSheet("color: green;");
     user->setText(QString("Connecté, utilisateur actuel: %1.").arg(idf));

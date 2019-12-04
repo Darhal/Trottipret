@@ -3,17 +3,25 @@
 
 #include "Core/proprietaire.h"
 
-/*
- * Classe qui represente l'Utilisateur qui herite de Proprietaire
- * Parceque un utlisateur peut etre un Proprietaire et un Locataire dans notre appli
+/**
+ * @class Utilisateur
+ * @brief Classe qui represente l'Utilisateur qui herite de Proprietaire
+ * Car un utlisateur peut etre un Proprietaire et un Locataire dans notre application
 */
 class Utilisateur : public Proprietaire
 {
 public:
-    // Constructeur avec des arguments par default
+    /**
+     * @fb Utilisateur
+     * @brief Constructeur avec des arguments par defaut
+    */
     Utilisateur(const QString& identifiant = "anonyme", const QString& mail = "anonyme@anonyme.com");
 
-    // Getteur qui recupere l' identifiant
+    /**
+     * @fb Utilisateur
+     * @brief Getteur qui recupere l' identifiant
+     * @return const QString&
+    */
     const QString& GetIdentifiant() { return m_Identifiant; }
 private:
     // Les champs

@@ -76,7 +76,7 @@
      <item>
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Mot de pass: </string>
+        <string>Mot de passe : </string>
        </property>
       </widget>
      </item>

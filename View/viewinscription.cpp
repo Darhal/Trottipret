@@ -24,16 +24,16 @@ bool ViewInscription::VerifySignupInformations()
 
     // Si l'email, l'identifiant et la mdp ne sont pas vides alors
     if (!idf.isEmpty() && !email.isEmpty() && !mdp.isEmpty()){
-        // Un regex qui va verfier que il s'agit bien d'un email et pas autre
+        // Un regex qui va verifier qu'il s'agit bien d'un email et pas autre
         QRegExp mailREX("\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b");
         mailREX.setCaseSensitivity(Qt::CaseInsensitive);
         mailREX.setPatternSyntax(QRegExp::RegExp);
-        if (!mailREX.exactMatch(email)){ // Si ca ne correspond pas au regex alors retourne faux et afficher error
+        if (!mailREX.exactMatch(email)){ // Si ça ne correspond pas au regex alors retourne faux et affiche error
             ui->warning->setText("INFORMATIONS INVALIDES: Veuillez verifier\nque l'adresse mail est correcte.");
             return false;
         }
 
-        // Effectuer une requête sur la base de données avec le nom d'utilisateur donné pour
+        // Effectue une requête sur la base de données avec le nom d'utilisateur donné pour
         // vérifier si l'utilisateur existe déjà
         QSqlQuery r = DatabaseManager::GetInstance()
                 .Exec("SELECT * FROM utilisateurs WHERE identifiant='%s';", idf.toLocal8Bit().constData());
@@ -42,8 +42,8 @@ bool ViewInscription::VerifySignupInformations()
             return false;
         }
 
-        return true; // toute est bon on peut faire le signup
-    }else{ // l'und es champs sont vides!
+        return true; // tout est bon, on peut faire le signup
+    }else{ // l'un des champs est vide
         ui->warning->setText("INFORMATIONS MANQUANTES: Veuillez renseigner\nl'identifiant,  l'adresse mail et le mot de pass.");
         return false;
     }
@@ -59,7 +59,7 @@ void ViewInscription::on_buttonBox_accepted()
 
 void ViewInscription::FinishSignup()
 {
-    // A cette ettape toutes les informations sont correctes!
+    // A cette ettape toutes les informations sont correctes
 
     // Recupere les informations
     QString email = ui->adrmail->text();
@@ -74,7 +74,7 @@ void ViewInscription::FinishSignup()
     // l'utilisateur a fourni et le comparons déjà au hachage de la base de données
     QString mdp_hashed = QString(QCryptographicHash::hash(mdp.toLocal8Bit().constData(), QCryptographicHash::Sha256).toHex());
 
-    // Appelez notre gestionnaire de base de données et effectuez
+    // Appele notre gestionnaire de base de données et effectue
     // une requête pour insérer le nouvel utilisateur.
     DatabaseManager::GetInstance().
         Exec(
@@ -96,7 +96,7 @@ void ViewInscription::FinishSignup()
            "Veuillez le mémoriser car vous ne pourrez plus le changer plus tard.").arg(idf)
     );
 
-    QDialog::accept(); // fermer la fentre de dialog
+    QDialog::accept(); // fermer la fenêtre de dialog
 }
 
 void ViewInscription::accept()

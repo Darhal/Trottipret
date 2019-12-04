@@ -16,7 +16,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv); // QApplication
-    MainWindow w; // Constructeur par défaut et allouer statiquement notre MainWindow
-    w.show(); // Appelez son show
+    MainWindow w; // Constructeur par défaut et alloue statiquement notre MainWindow
+    w.show(); // Appele son show
     return a.exec(); // retourne a.exec();
 }

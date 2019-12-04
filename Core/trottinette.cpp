@@ -1,6 +1,6 @@
 #include "trottinette.h"
 
-// constructeur normale
+// constructeur normal
 Trottinette::Trottinette(const QString& model, unsigned int ref, const QString& etat)
     : m_Model(model), m_Etat(etat), m_Image(), m_Ref(ref)
 {
