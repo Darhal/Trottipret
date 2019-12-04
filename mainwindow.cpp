@@ -4,12 +4,14 @@
 #include "View/viewinscription.h"
 #include "View/viewconnection.h"
 #include <QSignalMapper>
+#include <QDebug>
 
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    qDebug() << "Hello from ctor.";
     ui->setupUi(this); // Initialise le UI
 
     signalMapper  = new QSignalMapper{ this }; // Allocation dynamique de mon signal mapper

@@ -15,18 +15,23 @@ public:
      * @fb Utilisateur
      * @brief Constructeur avec des arguments par defaut
     */
-    Utilisateur(const QString& identifiant = "anonyme", const QString& mail = "anonyme@anonyme.com");
+    Utilisateur(const QString& identifiant = "anonyme",
+                const QString& mail = "anonyme@anonyme.com",
+                const QString& nom = "anonyme",
+                const QString& prenom = "anonyme",
+                const QString& mdp = "0",
+            );
 
     /**
      * @fb Utilisateur
      * @brief Getteur qui recupere l' identifiant
      * @return const QString&
     */
-    const QString& GetIdentifiant() { return m_Identifiant; }
+    const QString& GetIdentifiant() const { return m_Identifiant; }
 private:
     // Les champs
     const QString m_Identifiant;
-    QString m_Nom, m_Prenom, m_AdresseMail, m_Mdp;
+    QString m_AdresseMail, m_Nom, m_Prenom, m_Mdp;
 
 };
 

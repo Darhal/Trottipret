@@ -30,6 +30,20 @@ public:
     */
     ~ViewOffreLocation(); //destructeur
 
+    void VerifyInformations();
+
+    void SubmitOffre();
+
+private slots:
+    /**
+     * @fn accept
+     * @brief  les slots, on surcharge la fonction accept pour ne pas
+     * supprimer la fenêtre lorsque les
+     * informations ne sont pas bonnes
+    */
+    void accept() override;
+
+
 private:
     Ui::ViewOffreLocation* ui;
 };

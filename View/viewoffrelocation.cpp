@@ -9,6 +9,17 @@ ViewOffreLocation::ViewOffreLocation(QWidget *parent) :
     ui->setupUi(this);
 }
 
+void ViewOffreLocation::VerifyInformations()
+{
+
+}
+
+void ViewOffreLocation::SubmitOffre()
+{
+
+}
+
+
 // Destructeur
 ViewOffreLocation::~ViewOffreLocation()
 {

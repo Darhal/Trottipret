@@ -27,6 +27,17 @@ void DatabaseManager::InitilizeDatabase()
         "motdepass varchar(64)"
         ");"
     );
+
+    this->Exec(
+        "CREATE TABLE IF NOT EXISTS OffreLocations"
+        "(id INT PRIMARY KEY, "
+        "date_debut DATE, "
+        "date_fin DATE, "
+        "lieux_debut TEXT, "
+        "lieux_fin TEXT, "
+        "prix_caution FLOAT"
+        ");"
+    );
 }
 
 DatabaseManager::DatabaseManager() : db(QSqlDatabase::addDatabase("QSQLITE"))

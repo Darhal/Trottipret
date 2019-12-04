@@ -7,6 +7,7 @@ namespace Ui {
 class ViewConnection;
 }
 
+class Utilisateur; // Forward declaration
 
 /**
  * @class ViewConnection
@@ -26,15 +27,16 @@ public:
     explicit ViewConnection(QWidget *parent = 0);
 
     /**
-     * @fn Fonction qui verifie les informations de login
-     * @return bool
+     * @fn Fonction qui verifie les informations de login et retourne l'utilisateur correspondant
+     * @return Utilisateur*
     */
-    bool VerifyLoginInformations();
+    Utilisateur* VerifyLoginInformations(Utilisateur* user);
 
     /**
      * @fn Fonction qui effectue le login
+     * @param Utilisateur* user
     */
-    void FinishLogin();
+    void FinishLogin(Utilisateur* user);
 
     /**
      * @fn Destructeur

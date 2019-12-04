@@ -2,12 +2,7 @@
 #include <QApplication>
 #include <QtGlobal>
 #include <QDebug>
-#include "Core/utilisateur.h"
-#include "Core/trottinette.h"
-#include "Core/offrelocation.h"
-#include "Core/proprietaire.h"
-#include "Core/trottinette.h"
-#include "Core/databasemanager.h"
+#include "Core/applicationmanager.h"
 #include <qdir.h>
 
 /*
@@ -16,7 +11,10 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv); // QApplication
-    MainWindow w; // Constructeur par défaut et alloue statiquement notre MainWindow
-    w.show(); // Appele son show
+    ApplicationManager& manager = ApplicationManager::GetInstance();
+    manager.StartApplication();
+    MainWindow w;
+    w.show();
+    ApplicationManager::Free();
     return a.exec(); // retourne a.exec();
 }

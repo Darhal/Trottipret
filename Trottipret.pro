@@ -26,7 +26,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
     mainwindow.cpp \
-    Core/core.cpp \
     Core/proprietaire.cpp \
     Core/offrelocation.cpp \
     Core/utilisateur.cpp \
@@ -35,11 +34,11 @@ SOURCES += \
     View/viewoffrelocation.cpp \
     View/viewinscription.cpp \
     Core/databasemanager.cpp \
-    View/viewconnection.cpp
+    View/viewconnection.cpp \
+    Core/applicationmanager.cpp
 
 HEADERS += \
         mainwindow.h \
-    Core/core.h \
     Core/proprietaire.h \
     Core/offrelocation.h \
     Core/utilisateur.h \
@@ -48,7 +47,8 @@ HEADERS += \
     View/viewoffrelocation.h \
     View/viewinscription.h \
     Core/databasemanager.h \
-    View/viewconnection.h
+    View/viewconnection.h \
+    Core/applicationmanager.h
 
 FORMS += \
         mainwindow.ui \
