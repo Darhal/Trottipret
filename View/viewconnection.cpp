@@ -71,7 +71,7 @@ void ViewConnection::FinishLogin()
 
 void ViewConnection::accept()
 {
-    // si les donnees sont bonnes
+    // Si les donnees sont valides
     if (VerifyLoginInformations()){
         this->FinishLogin(); // faire le login
     }
