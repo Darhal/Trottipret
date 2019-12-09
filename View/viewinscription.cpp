@@ -22,7 +22,7 @@ bool ViewInscription::VerifySignupInformations()
     QString nom = ui->nom->text();
     QString prenom = ui->prenom->text();
 
-    // Si l'email, l'identifiant et la mdp ne sont pas vides alors
+    // Si l'email, l'identifiant et le mdp ne sont pas vides alors
     if (!idf.isEmpty() && !email.isEmpty() && !mdp.isEmpty()){
         // Un regex qui va verifier qu'il s'agit bien d'un email et pas autre
         QRegExp mailREX("\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b");
@@ -37,14 +37,14 @@ bool ViewInscription::VerifySignupInformations()
         // vérifier si l'utilisateur existe déjà
         QSqlQuery r = DatabaseManager::GetInstance()
                 .Exec("SELECT * FROM utilisateurs WHERE identifiant='%s';", idf.toLocal8Bit().constData());
-        if (r.next()){ // Il ya des resultats alors retourne false et print l'error
+        if (r.next()){ // Il ya des resultats alors return false et print l'error
             ui->warning->setText("IDENTIFIANT DEJA UTILISE: Veuillez en choisir\nun autre.");
             return false;
         }
 
         return true; // tout est bon, on peut faire le signup
     }else{ // l'un des champs est vide
-        ui->warning->setText("INFORMATIONS MANQUANTES: Veuillez renseigner\nl'identifiant,  l'adresse mail et le mot de pass.");
+        ui->warning->setText("INFORMATIONS MANQUANTES \nVeuillez renseigner :\nl'identifiant,  l'adresse mail et le mot de passe.");
         return false;
     }
 }
@@ -59,7 +59,7 @@ void ViewInscription::on_buttonBox_accepted()
 
 void ViewInscription::FinishSignup()
 {
-    // A cette ettape toutes les informations sont correctes
+    // A cette etape toutes les informations sont correctes
 
     // Recupere les informations
     QString email = ui->adrmail->text();
@@ -102,7 +102,7 @@ void ViewInscription::FinishSignup()
 void ViewInscription::accept()
 {
     // L'événement viendra ici en premier
-    if (VerifySignupInformations()){ // verification des donnes: email, utilisateur qui existe deja etc...
+    if (VerifySignupInformations()){ // verification des donnees: email, utilisateur qui existe deja etc...
         this->FinishSignup(); // faire le signup
     }
 }

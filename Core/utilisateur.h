@@ -19,7 +19,7 @@ public:
                 const QString& mail = "anonyme@anonyme.com",
                 const QString& nom = "anonyme",
                 const QString& prenom = "anonyme",
-                const QString& mdp = "0",
+                const QString& mdp = "0"
             );
 
     /**
