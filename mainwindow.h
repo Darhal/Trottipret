@@ -7,6 +7,8 @@ namespace Ui {
     class MainWindow;
 }
 
+class QCloseEvent;
+
 /**
  * @class MainWindow
  * @brief Classe MainWIndow qui possède l'interface utilisateur de la fenêtre principale
@@ -48,6 +50,8 @@ public:
      * @return rien
     */
     Ui::MainWindow* GetUI() {return ui;}
+
+    void closeEvent(QCloseEvent* event) override;
 
 private slots:
     /**

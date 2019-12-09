@@ -5,6 +5,7 @@
 #include <QCryptographicHash>
 #include <Core/databasemanager.h>
 #include "mainwindow.h"
+#include <Core/applicationmanager.h>
 
 // Constructeur generé par Qt
 ViewConnection::ViewConnection(QWidget *parent) :
@@ -19,7 +20,7 @@ bool ViewConnection::VerifyLoginInformations()
     QString idf = ui->identifiant->text(); // recupere l'identifiant
     QString mdp = ui->mdp->text(); // recupere le mot de passe
     // Effectue une requête de base de données en utilisant l'identifiant fourni
-    QSqlQuery r = DatabaseManager::GetInstance()
+    QSqlQuery& r = DatabaseManager::GetInstance()
             .Exec("SELECT * FROM utilisateurs WHERE identifiant='%s';", idf.toLocal8Bit().constData());
 
     if (r.next()){ // S'il ya des resultats
@@ -34,6 +35,12 @@ bool ViewConnection::VerifyLoginInformations()
         // ce qui en fait une bonne mesure de sécurité, ce qui rendra plus difficile
         // la tâche des pirates informatiques
         if (mdp_hashed == r.value(4).toString()){
+            Utilisateur* user = new Utilisateur(
+                        r.value(0).toString(), r.value(3).toString(),
+                        r.value(1).toString(), r.value(2).toString(),
+                        r.value(4).toString()
+                );
+            ApplicationManager::GetInstance().SetCurrentUser(user);
             return true; // connexion réussie :)
         }else{
             // mot de passe incorrect :(
@@ -52,7 +59,6 @@ void ViewConnection::FinishLogin()
 {
     // Cette fonction est appelée uniquement après avoir vérifié les informations de connexion,
     // donc pas besoin de revérifier
-
     QString idf = ui->identifiant->text(); // recupere l'identifiant
 
     // Affiche une petite fenêtre informant l'utilisateur qu'il s'est connecté avec succès

@@ -5,13 +5,16 @@
 #include "View/viewconnection.h"
 #include <QSignalMapper>
 #include <QDebug>
-
+#include <QCloseEvent>
+#include "Core/applicationmanager.h"
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    qDebug() << "Hello from ctor.";
+    ApplicationManager::GetInstance(); // intilize the application manager
+    // manager.StartApplication();
     ui->setupUi(this); // Initialise le UI
 
     signalMapper  = new QSignalMapper{ this }; // Allocation dynamique de mon signal mapper
@@ -30,6 +33,21 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Connecte notre signalMap.
     connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(OpenDialogWindow(int)));
+}
+
+
+void MainWindow::closeEvent (QCloseEvent *event)
+{
+    QMessageBox::StandardButton resBtn = QMessageBox::question( this, "Trottipret",
+                                                                tr("Are you sure you want to quit the application ?\n"),
+                                                                QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes,
+                                                                QMessageBox::Yes);
+    if (resBtn != QMessageBox::Yes) {
+        event->ignore();
+    } else {
+        event->accept();
+        ApplicationManager::Free();
+    }
 }
 
 void MainWindow::OpenDialogWindow(int dialog_id)

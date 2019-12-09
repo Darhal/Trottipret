@@ -35,7 +35,7 @@ bool ViewInscription::VerifySignupInformations()
 
         // Effectue une requête sur la base de données avec le nom d'utilisateur donné pour
         // vérifier si l'utilisateur existe déjà
-        QSqlQuery r = DatabaseManager::GetInstance()
+        QSqlQuery& r = DatabaseManager::GetInstance()
                 .Exec("SELECT * FROM utilisateurs WHERE identifiant='%s';", idf.toLocal8Bit().constData());
         if (r.next()){ // Il ya des resultats alors return false et print l'error
             ui->warning->setText("IDENTIFIANT DEJA UTILISE: Veuillez en choisir\nun autre.");

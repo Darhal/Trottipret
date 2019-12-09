@@ -18,7 +18,17 @@ class ViewOffreLocation : public QDialog
 
 public:
     explicit ViewOffreLocation(QWidget *parent = 0); // constructeur
+
     ~ViewOffreLocation(); //destructeur
+
+    bool VerifyData(); // Verification des donnees du formulaire
+
+    void SubmitOffre();
+
+private slots:
+    void accept() override; // les slots, on surcharge la fonction accept pour ne pas
+                            // supprimer la fenêtre lorsque les
+                            // informations ne sont pas bonnes
 
 private:
     Ui::ViewOffreLocation* ui;

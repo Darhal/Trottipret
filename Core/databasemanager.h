@@ -31,7 +31,7 @@ public:
      * @param const char* statment
      * @return QSqlQuery
     */
-    QSqlQuery Exec(const char* statment);
+    QSqlQuery& Exec(const char* statment);
 
     /**
      * @fn Exec
@@ -42,7 +42,7 @@ public:
      * @return QSqlQuery
     */
     template<typename... Args>
-    QSqlQuery Exec(const char* statment, Args&&... args);
+    QSqlQuery& Exec(const char* statment, Args&&... args);
 
     /**
      * @fn save
@@ -65,7 +65,7 @@ private:
 };
 
 template<typename... Args>
-QSqlQuery DatabaseManager::Exec(const char* statment, Args&&... args)
+QSqlQuery& DatabaseManager::Exec(const char* statment, Args&&... args)
 {
     char statment_buffer[2048]; // Un buffer de 2048 pour eviter l'allocation dynamique!
     sprintf(statment_buffer, statment, std::forward<Args>(args)...); // formatter notre requete

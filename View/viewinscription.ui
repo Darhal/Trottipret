@@ -131,7 +131,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="mdp"/>
+      <widget class="QLineEdit" name="mdp">
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>

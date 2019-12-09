@@ -29,13 +29,23 @@ void DatabaseManager::InitilizeDatabase()
     );
 
     this->Exec(
-        "CREATE TABLE IF NOT EXISTS OffreLocations"
+        "CREATE TABLE IF NOT EXISTS trottinettes"
+        "(ref_trotti INT PRIMARY KEY, "
+        "model varchar(20), "
+        "etat varchar(20), "
+        ");"
+    );
+
+    this->Exec(
+        "CREATE TABLE IF NOT EXISTS offrelocations"
         "(id INT PRIMARY KEY, "
         "date_debut DATE, "
         "date_fin DATE, "
-        "lieux_debut TEXT, "
-        "lieux_fin TEXT, "
-        "prix_caution FLOAT"
+        "lieu_debut TEXT, "
+        "lieu_fin TEXT, "
+        "prix_caution FLOAT,"
+        "identifiant TEXT FOREIGN KEY REFERENCES utilisateurs(identifiant),"
+        "ref_trotti INT FOREIGN KEY REFERENCES trottinettes(ref_trotti)"
         ");"
     );
 }
@@ -55,7 +65,7 @@ DatabaseManager::DatabaseManager() : db(QSqlDatabase::addDatabase("QSQLITE"))
 }
 
 // Fonction qui execute une requete sans arguments
-QSqlQuery DatabaseManager::Exec(const char* statment)
+QSqlQuery& DatabaseManager::Exec(const char* statment)
 {
     query.clear();
     query.exec(statment);

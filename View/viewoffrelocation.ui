@@ -59,7 +59,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="model"/>
      </item>
     </layout>
    </widget>
@@ -81,7 +81,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_2"/>
+      <widget class="QLineEdit" name="ref"/>
      </item>
     </layout>
    </widget>
@@ -103,7 +103,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="etat">
        <item>
         <property name="text">
          <string>Neuve</string>
@@ -185,7 +185,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_3"/>
+      <widget class="QLineEdit" name="lieu_retrait"/>
      </item>
     </layout>
    </widget>
@@ -207,7 +207,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_4"/>
+      <widget class="QLineEdit" name="lieu_retour"/>
      </item>
     </layout>
    </widget>
@@ -229,7 +229,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_5"/>
+      <widget class="QLineEdit" name="date_retrait"/>
      </item>
     </layout>
    </widget>
@@ -251,7 +251,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_8"/>
+      <widget class="QLineEdit" name="date_retour"/>
      </item>
     </layout>
    </widget>
@@ -273,10 +273,27 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_9"/>
+      <widget class="QLineEdit" name="prix_caution"/>
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QLabel" name="warning">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>390</y>
+     <width>211</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:  red;
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>
