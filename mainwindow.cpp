@@ -39,8 +39,8 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::closeEvent (QCloseEvent *event)
 {
     QMessageBox::StandardButton resBtn = QMessageBox::question( this, "Trottipret",
-                                                                tr("Are you sure you want to quit the application ?\n"),
-                                                                QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes,
+                                                                tr("Etes-vous sûr de vouloir quitter l'application ?\n"),
+                                                                QMessageBox::No | QMessageBox::Yes,
                                                                 QMessageBox::Yes);
     if (resBtn != QMessageBox::Yes) {
         event->ignore();

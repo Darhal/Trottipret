@@ -15,7 +15,7 @@ ViewOffreLocation::ViewOffreLocation(QWidget *parent) :
 
 bool ViewOffreLocation::VerifyData()
 {
-    qDebug() << ApplicationManager::GetInstance().GetCurrentUser() << " - " << NULL;
+    // qDebug() << ApplicationManager::GetInstance().GetCurrentUser() << " - " << NULL;
     if (ApplicationManager::GetInstance().GetCurrentUser() == NULL){
         ui->warning->setText("Cette fonction n'est pas disponible lorsque vous n'êtes pas connecté.");
         return false;
