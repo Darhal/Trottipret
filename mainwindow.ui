@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>300</height>
+    <height>430</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>10</x>
       <y>10</y>
       <width>381</width>
-      <height>221</height>
+      <height>351</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -47,14 +47,28 @@
      <item>
       <widget class="QPushButton" name="ConnectionButton">
        <property name="text">
-        <string>identifiez-vous</string>
+        <string>Identifiez-Vous</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="OffreLocationButton">
        <property name="text">
-        <string>Proposer une offre de location</string>
+        <string>Proposer Une Offre De Location</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ListOffreLocButton">
+       <property name="text">
+        <string>Show Offre Locations</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ListeTrottiButton">
+       <property name="text">
+        <string>Show My Trottinettes</string>
        </property>
       </widget>
      </item>

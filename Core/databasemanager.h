@@ -44,6 +44,14 @@ public:
     template<typename... Args>
     QSqlQuery& Exec(const char* statment, Args&&... args);
 
+    template<typename... Args>
+    QSqlQuery& Prepare(const char* statment, Args&&... args);
+
+    template<typename T>
+    void BindValue(const QString& label, const T& value);
+
+    void Exec();
+
     /**
      * @fn save
      * @return void
@@ -72,6 +80,22 @@ QSqlQuery& DatabaseManager::Exec(const char* statment, Args&&... args)
     query.clear(); // netoyer le query
     query.exec(statment_buffer); // executer la commande
     return query; // retourner le querry qui contient les resultats
+}
+
+template<typename... Args>
+QSqlQuery& DatabaseManager::Prepare(const char* statment, Args&&... args)
+{
+    char statment_buffer[2048]; // Un buffer de 2048 pour eviter l'allocation dynamique!
+    sprintf(statment_buffer, statment, std::forward<Args>(args)...); // formatter notre requete
+    query.clear(); // netoyer le query
+    query.prepare(statment_buffer); // executer la commande
+    return query; // retourner le querry qui contient les resultats
+}
+
+template<typename T>
+void DatabaseManager::BindValue(const QString& label, const T& value)
+{
+    query.bindValue(label, value);
 }
 
 #endif // DATABASEMANAGER_H

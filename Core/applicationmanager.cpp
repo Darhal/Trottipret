@@ -6,8 +6,6 @@ ApplicationManager* ApplicationManager::s_Instance = NULL;
 ApplicationManager::ApplicationManager() :
     m_CurrentUser(NULL)// m_MainWindow()
 {
-    qDebug() << m_CurrentUser;
-
 }
 
 ApplicationManager& ApplicationManager::GetInstance()

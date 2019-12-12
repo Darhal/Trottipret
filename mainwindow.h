@@ -29,6 +29,8 @@ public:
         LOGIN = 0x0,
         SIGNUP = 0x1,
         OFFRE_LOCATION = 0x2,
+        VIEW_OFFRE_LOCATION = 0x3,
+        VIEW_LISTE_TROTTI = 0x4,
     };
 
     /**

@@ -36,7 +36,9 @@ SOURCES += \
     View/viewinscription.cpp \
     Core/databasemanager.cpp \
     View/viewconnection.cpp \
-    Core/applicationmanager.cpp
+    Core/applicationmanager.cpp \
+    View/viewlistoffrelocation.cpp \
+    View/viewlistetrottinette.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -49,10 +51,14 @@ HEADERS += \
     View/viewinscription.h \
     Core/databasemanager.h \
     View/viewconnection.h \
-    Core/applicationmanager.h
+    Core/applicationmanager.h \
+    View/viewlistoffrelocation.h \
+    View/viewlistetrottinette.h
 
 FORMS += \
         mainwindow.ui \
     View/viewoffrelocation.ui \
     View/viewinscription.ui \
-    View/viewconnection.ui
+    View/viewconnection.ui \
+    View/viewlistoffrelocation.ui \
+    View/viewlistetrottinette.ui

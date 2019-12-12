@@ -18,7 +18,7 @@ public:
 
     void SetCurrentUser(Utilisateur* user);
 
-    Utilisateur* GetCurrentUser() { return m_CurrentUser; };
+    Utilisateur* GetCurrentUser() { return m_CurrentUser; }
 private:
     ApplicationManager();
 

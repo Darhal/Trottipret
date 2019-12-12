@@ -30,22 +30,27 @@ void DatabaseManager::InitilizeDatabase()
 
     this->Exec(
         "CREATE TABLE IF NOT EXISTS trottinettes"
-        "(ref_trotti INT PRIMARY KEY, "
-        "model varchar(20), "
-        "etat varchar(20), "
+        "(ref_trotti VARCHAR(20) PRIMARY KEY,"
+        "model VARCHAR(20), "
+        "etat VARCHAR(20),"
+        "image BOLB,"
+        "identifiant TEXT NOT NULL,"
+        "FOREIGN KEY (identifiant) REFERENCES utilisateurs(identifiant)"
         ");"
     );
 
     this->Exec(
         "CREATE TABLE IF NOT EXISTS offrelocations"
-        "(id INT PRIMARY KEY, "
+        "(identifiant TEXT NOT NULL,"
+        "ref_trotti VARCHAR(20) NOT NULL,"
         "date_debut DATE, "
         "date_fin DATE, "
         "lieu_debut TEXT, "
         "lieu_fin TEXT, "
         "prix_caution FLOAT,"
-        "identifiant TEXT FOREIGN KEY REFERENCES utilisateurs(identifiant),"
-        "ref_trotti INT FOREIGN KEY REFERENCES trottinettes(ref_trotti)"
+        "PRIMARY KEY (identifiant, ref_trotti),"
+        "FOREIGN KEY (identifiant) REFERENCES utilisateurs(identifiant),"
+        "FOREIGN KEY (ref_trotti) REFERENCES trottinettes(ref_trotti)"
         ");"
     );
 }
@@ -70,6 +75,11 @@ QSqlQuery& DatabaseManager::Exec(const char* statment)
     query.clear();
     query.exec(statment);
     return query;
+}
+
+void DatabaseManager::Exec()
+{
+    query.exec();
 }
 
 // fonction qui commit la db

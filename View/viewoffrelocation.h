@@ -32,6 +32,7 @@ private slots:
 
 private:
     Ui::ViewOffreLocation* ui;
+    QString m_ImageFilePath;
 };
 
 #endif // VIEWOFFRELOCATION_H

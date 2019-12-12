@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ViewListOffreLocation</class>
+ <widget class="QDialog" name="ViewListOffreLocation">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>852</width>
+    <height>369</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>831</width>
+     <height>301</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Offre Location Liste:</string>
+   </property>
+   <widget class="QTableWidget" name="tableOffLoc">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>20</y>
+      <width>831</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>Reference Trottinette</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Date Debut</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Date Fin</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Lieu Debut</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Lieu Fin</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Prix</string>
+     </property>
+    </column>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="fermer">
+   <property name="geometry">
+    <rect>
+     <x>760</x>
+     <y>330</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Fermer</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
