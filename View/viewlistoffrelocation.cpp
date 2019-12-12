@@ -2,6 +2,7 @@
 #include "ui_viewlistoffrelocation.h"
 #include "Core/applicationmanager.h"
 #include "Core/databasemanager.h"
+#include <qdebug.h>
 
 ViewListOffreLocation::ViewListOffreLocation(QWidget *parent) :
     QDialog(parent),
@@ -27,6 +28,11 @@ ViewListOffreLocation::ViewListOffreLocation(QWidget *parent) :
     }
 
     connect(ui->fermer, &QPushButton::clicked, this, [this](){this->close();});
+    connect(ui->tableOffLoc, &QTableWidget::itemChanged, this,
+        [this](QTableWidgetItem*item){
+            qDebug() << "Item changed (C:" << item->column() << "L:" << item->row();
+        }
+    );
 }
 
 ViewListOffreLocation::~ViewListOffreLocation()

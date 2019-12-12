@@ -28,6 +28,11 @@ ViewListeTrottinette::ViewListeTrottinette(QWidget *parent) :
 
     connect(ui->listTrotti, SIGNAL(clicked(const QModelIndex&)), this, SLOT(OnRowSelection()));
     connect(ui->fermer, &QPushButton::clicked, this, [this](){this->close();});
+    connect(ui->listTrotti, &QTableWidget::itemChanged, this,
+        [this](QTableWidgetItem*item){
+            qDebug() << "Item changed (C:" << item->column() << "L:" << item->row();
+        }
+    );
 }
 
 void ViewListeTrottinette::OnRowSelection()
