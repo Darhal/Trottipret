@@ -72,6 +72,20 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="AllOffreButton">
+       <property name="text">
+        <string>Show All Offers</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ActiveLocationButton">
+       <property name="text">
+        <string>My Current Locations</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
   </widget>

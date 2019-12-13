@@ -3,6 +3,7 @@
 #include "View/viewoffrelocation.h"
 #include "View/viewinscription.h"
 #include "View/viewconnection.h"
+#include "View/viewalloffre.h".h"
 #include "View/viewlistoffrelocation.h"
 #include <QSignalMapper>
 #include <QDebug>
@@ -29,6 +30,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->OffreLocationButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
     connect(ui->ListOffreLocButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
     connect(ui->ListeTrottiButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
+    connect(ui->AllOffreButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
+    connect(ui->ActiveLocationButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
 
      // Initialise nos buttons avec leur attribus.
     signalMapper->setMapping(ui->InscriptionButton, DialogWindow::SIGNUP);
@@ -36,6 +39,8 @@ MainWindow::MainWindow(QWidget *parent) :
     signalMapper->setMapping(ui->OffreLocationButton, DialogWindow::OFFRE_LOCATION);
     signalMapper->setMapping(ui->ListOffreLocButton, DialogWindow::VIEW_OFFRE_LOCATION);
     signalMapper->setMapping(ui->ListeTrottiButton, DialogWindow::VIEW_LISTE_TROTTI);
+    signalMapper->setMapping(ui->AllOffreButton, DialogWindow::VIEW_ALL_OFFRE);
+    signalMapper->setMapping(ui->ActiveLocationButton, DialogWindow::VIEW_ACTIVE_LOCATIONS);
 
     // Connecte notre signalMap.
     connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(OpenDialogWindow(int)));
@@ -77,6 +82,12 @@ void MainWindow::OpenDialogWindow(int dialog_id)
         break;
     case DialogWindow::VIEW_LISTE_TROTTI:
         dialog_wnd = new ViewListeTrottinette(this);
+        break;
+    case DialogWindow::VIEW_ALL_OFFRE:
+        dialog_wnd = new ViewAllOffre(this);
+        break;
+    case DialogWindow::VIEW_ACTIVE_LOCATIONS:
+        // dialog_wnd = new ViewListeTrottinette(this);
         break;
     default:
         return;

@@ -34,7 +34,7 @@ ViewListOffreLocation::ViewListOffreLocation(QWidget *parent) :
     connect(ui->fermer, &QPushButton::clicked, this, [this](){this->close();});
     connect(ui->tableOffLoc, &QTableWidget::itemChanged, this,
         [this](QTableWidgetItem*item){
-            QString ref = ui->tableOffLoc->itemAt(item->row(), REF)->text();
+            QString ref = ui->tableOffLoc->item(item->row(), REF)->text();
             QString updated_text = item->text();
             QString idf = ApplicationManager::GetInstance().GetCurrentUser()->GetIdentifiant();
 

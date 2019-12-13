@@ -54,28 +54,52 @@
   <widget class="QLabel" name="imageTrotti">
    <property name="geometry">
     <rect>
-     <x>580</x>
+     <x>570</x>
      <y>30</y>
-     <width>311</width>
-     <height>321</height>
+     <width>331</width>
+     <height>281</height>
     </rect>
    </property>
    <property name="text">
     <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="fermer">
+  <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>820</x>
-     <y>360</y>
-     <width>80</width>
-     <height>24</height>
+     <x>560</x>
+     <y>320</y>
+     <width>351</width>
+     <height>78</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Fermer</string>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="fullView">
+      <property name="text">
+       <string>See Full View</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="editPic">
+        <property name="text">
+         <string>Edit Picture</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="fermer">
+        <property name="text">
+         <string>Fermer</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

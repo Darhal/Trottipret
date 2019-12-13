@@ -34,7 +34,27 @@ ViewListeTrottinette::ViewListeTrottinette(QWidget *parent) :
     connect(ui->fermer, &QPushButton::clicked, this, [this](){this->close();});
     connect(ui->listTrotti, &QTableWidget::itemChanged, this,
         [this](QTableWidgetItem*item){
-            qDebug() << "Item changed (C:" << item->column() << "L:" << item->row();
+            QString ref = ui->listTrotti->item(item->row(), REF)->text();
+            QString updated_text = item->text();
+
+            switch((Cols)item->column()){
+            case REF:
+                break;
+            case MODEL:
+                DatabaseManager::GetInstance()
+                        .Exec("UPDATE trottinettes SET model = '%s' WHERE ref_trotti='%s';",
+                                updated_text.toLocal8Bit().constData(), ref.toLocal8Bit().constData()
+                             );
+                break;
+            case ETAT:
+                DatabaseManager::GetInstance()
+                        .Exec("UPDATE trottinettes SET etat = '%s' WHERE ref_trotti='%s';",
+                                updated_text.toLocal8Bit().constData(), ref.toLocal8Bit().constData()
+                              );
+                break;
+            default:
+                break;
+            };
         }
     );
 }
@@ -45,11 +65,6 @@ void ViewListeTrottinette::OnRowSelection()
     int i = index.row();
     QString ref = ui->listTrotti->item(i, 0)->text();
 
-    /*for (int ic = 0; ic < ui->listTrotti->columnCount(); ic++){
-        ui->listTrotti->item(i, ic)->setSelected(true);
-    }*/
-
-    qDebug() << ref;
     QSqlQuery& r = DatabaseManager::GetInstance()
             .Exec("SELECT image FROM trottinettes WHERE ref_trotti = '%s';", ref.toLocal8Bit().constData());
     if (r.first()){

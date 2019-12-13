@@ -30,7 +30,7 @@ void DatabaseManager::InitilizeDatabase()
 
     this->Exec(
         "CREATE TABLE IF NOT EXISTS trottinettes"
-        "(ref_trotti VARCHAR(20) PRIMARY KEY,"
+        "(ref_trotti TEXT PRIMARY KEY,"
         "model VARCHAR(20), "
         "etat VARCHAR(20),"
         "image BOLB,"
@@ -42,7 +42,7 @@ void DatabaseManager::InitilizeDatabase()
     this->Exec(
         "CREATE TABLE IF NOT EXISTS offrelocations"
         "(identifiant TEXT NOT NULL,"
-        "ref_trotti VARCHAR(20) NOT NULL,"
+        "ref_trotti TEXT NOT NULL,"
         "date_debut DATE, "
         "date_fin DATE, "
         "lieu_debut TEXT, "
@@ -51,6 +51,18 @@ void DatabaseManager::InitilizeDatabase()
         "PRIMARY KEY (identifiant, ref_trotti),"
         "FOREIGN KEY (identifiant) REFERENCES utilisateurs(identifiant),"
         "FOREIGN KEY (ref_trotti) REFERENCES trottinettes(ref_trotti)"
+        ");"
+    );
+
+    this->Exec(
+        "CREATE TABLE IF NOT EXISTS locations"
+        "(proprio TEXT NOT NULL,"
+        "ref_trotti TEXT NOT NULL,"
+        "locataire TEXT NOT NULL, "
+        "PRIMARY KEY (proprio, ref_trotti),"
+        "FOREIGN KEY (proprio) REFERENCES utilisateurs(proprio),"
+        "FOREIGN KEY (ref_trotti) REFERENCES trottinettes(ref_trotti),"
+        "FOREIGN KEY (locataire) REFERENCES utilisateurs(locataire)"
         ");"
     );
 }
