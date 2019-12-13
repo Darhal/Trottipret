@@ -21,7 +21,11 @@ ViewListeTrottinette::ViewListeTrottinette(QWidget *parent) :
             ui->listTrotti->insertRow(row_count);
 
             for(int i = 0; i < 3; i++){
-                ui->listTrotti->setItem(row_count, i, new QTableWidgetItem(r.value(i).toString()));
+                QTableWidgetItem* item = new QTableWidgetItem(r.value(i).toString());
+                if (i == 0){
+                    item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+                }
+                ui->listTrotti->setItem(row_count, i, item);
             }
         }
     }

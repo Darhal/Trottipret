@@ -11,6 +11,11 @@ class ViewListeTrottinette : public QDialog
 {
     Q_OBJECT
 
+    enum Cols {
+        REF = 0,
+        MODEL = 1,
+        ETAT = 2,
+    };
 public:
     explicit ViewListeTrottinette(QWidget *parent = 0);
     ~ViewListeTrottinette();
