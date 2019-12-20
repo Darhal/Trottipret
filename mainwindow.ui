@@ -52,13 +52,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="OffreLocationButton">
-       <property name="text">
-        <string>Proposer Une Offre De Location</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="ListOffreLocButton">
        <property name="text">
         <string>Show Offre Locations</string>

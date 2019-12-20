@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>922</width>
-    <height>401</height>
+    <height>452</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -49,55 +49,89 @@
       <string>Etat</string>
      </property>
     </column>
+    <column>
+     <property name="text">
+      <string>Status</string>
+     </property>
+    </column>
    </widget>
   </widget>
   <widget class="QLabel" name="imageTrotti">
    <property name="geometry">
     <rect>
-     <x>570</x>
+     <x>560</x>
      <y>30</y>
-     <width>331</width>
-     <height>281</height>
+     <width>351</width>
+     <height>311</height>
     </rect>
    </property>
    <property name="text">
     <string/>
    </property>
   </widget>
-  <widget class="QWidget" name="verticalLayoutWidget">
+  <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>560</x>
-     <y>320</y>
-     <width>351</width>
-     <height>78</height>
+     <x>19</x>
+     <y>399</y>
+     <width>891</width>
+     <height>41</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
-     <widget class="QPushButton" name="fullView">
+     <widget class="QPushButton" name="ajouterTrotti">
       <property name="text">
-       <string>See Full View</string>
+       <string>Ajoutter Une Trotinette</string>
       </property>
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QPushButton" name="editPic">
-        <property name="text">
-         <string>Edit Picture</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="fermer">
-        <property name="text">
-         <string>Fermer</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QPushButton" name="supprimer">
+      <property name="text">
+       <string>Supprimer Une Trotinette</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="louer">
+      <property name="text">
+       <string>Louer</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="fermer">
+      <property name="text">
+       <string>Fermer</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>360</y>
+     <width>351</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QPushButton" name="fullView">
+      <property name="text">
+       <string>See Full Picture</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="editPic">
+      <property name="text">
+       <string>Edit Picture</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

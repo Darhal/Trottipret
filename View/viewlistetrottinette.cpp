@@ -3,6 +3,8 @@
 #include <Core/databasemanager.h>
 #include <Core/applicationmanager.h>
 #include <qdebug.h>
+#include <View/viewoffrelocation.h>
+#include <View/viewaddtrottinette.h>
 
 ViewListeTrottinette::ViewListeTrottinette(QWidget *parent) :
     QDialog(parent),
@@ -12,25 +14,24 @@ ViewListeTrottinette::ViewListeTrottinette(QWidget *parent) :
     ui->listTrotti->verticalHeader()->hide();
     ui->listTrotti->setSelectionBehavior((QAbstractItemView::SelectRows));
     ui->listTrotti->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    Utilisateur* cur_user = ApplicationManager::GetInstance().GetCurrentUser();
-    if (cur_user != NULL){
-        QSqlQuery& r = DatabaseManager::GetInstance()
-                .Exec("SELECT * FROM trottinettes WHERE identifiant='%s';", cur_user->GetIdentifiant().toLocal8Bit().constData());
-        while (r.next()){
-            int row_count = ui->listTrotti->rowCount();
-            ui->listTrotti->insertRow(row_count);
 
-            for(int i = 0; i < 3; i++){
-                QTableWidgetItem* item = new QTableWidgetItem(r.value(i).toString());
-                if (i == 0){
-                    item->setFlags(item->flags() ^ Qt::ItemIsEditable);
-                }
-                ui->listTrotti->setItem(row_count, i, item);
-            }
-        }
-    }
+    this->RefreshList();
 
+    connect(ui->ajouterTrotti, &QPushButton::clicked, this, [this](){
+        QDialog* dialog_wnd = new ViewAddTrottinette(this);;
+        dialog_wnd->setAttribute(Qt::WA_DeleteOnClose); // Cela va liberer la memoire automatiquement
+        dialog_wnd->show(); // Affiche notre boîte de dialogue
+    });
+    connect(ui->louer, &QPushButton::clicked, this, [this](){
+
+        QModelIndex index = ui->listTrotti->currentIndex();
+        QString ref = ui->listTrotti->item(index.row(), 0)->text();
+        QDialog* dialog_wnd = new ViewOffreLocation(ref, this);;
+        dialog_wnd->setAttribute(Qt::WA_DeleteOnClose); // Cela va liberer la memoire automatiquement
+        dialog_wnd->show(); // Affiche notre boîte de dialogue
+    });
     connect(ui->listTrotti, SIGNAL(clicked(const QModelIndex&)), this, SLOT(OnRowSelection()));
+    connect(ui->listTrotti, &QTableWidget::itemSelectionChanged, this, [this](){ui->louer->setDisabled(false);});
     connect(ui->fermer, &QPushButton::clicked, this, [this](){this->close();});
     connect(ui->listTrotti, &QTableWidget::itemChanged, this,
         [this](QTableWidgetItem*item){
@@ -64,15 +65,56 @@ void ViewListeTrottinette::OnRowSelection()
     QModelIndex index = ui->listTrotti->currentIndex();
     int i = index.row();
     QString ref = ui->listTrotti->item(i, 0)->text();
+    QString status = ui->listTrotti->item(i, 3)->text();
+
+    if (status == QString("LIBRE")){
+        ui->louer->setDisabled(false);
+    }else{
+        ui->louer->setDisabled(true);
+    }
 
     QSqlQuery& r = DatabaseManager::GetInstance()
             .Exec("SELECT image FROM trottinettes WHERE ref_trotti = '%s';", ref.toLocal8Bit().constData());
+
     if (r.first()){
         QByteArray image_bytes = r.value(0).toByteArray();
         QPixmap img_pixmap = QPixmap();
         img_pixmap.loadFromData( std::move(image_bytes) );
         ui->imageTrotti->setPixmap(img_pixmap);
     }
+}
+
+void ViewListeTrottinette::RefreshList()
+{
+    Utilisateur* cur_user = ApplicationManager::GetInstance().GetCurrentUser();
+    ui->listTrotti->setRowCount(0);;
+
+    if (cur_user != NULL){
+        QSqlQuery r(std::move(DatabaseManager::GetInstance()
+                .Exec("SELECT * FROM trottinettes WHERE identifiant='%s';", cur_user->GetIdentifiant().toLocal8Bit().constData())));
+
+        while (r.next()) {
+            int row_count = ui->listTrotti->rowCount();
+            ui->listTrotti->insertRow(row_count);
+
+            for(int i = 0; i < 3; i++){
+                QTableWidgetItem* item = new QTableWidgetItem(r.value(i).toString());
+                ui->listTrotti->setItem(row_count, i, item);
+
+                if (i == 0){
+                    item->setFlags(item->flags() ^ Qt::ItemIsEditable);
+                }
+            }
+
+            QSqlQuery& r2 = DatabaseManager::GetInstance()
+                    .Exec("SELECT * FROM offrelocations WHERE identifiant='%s' AND ref_trotti='%s';",
+                          cur_user->GetIdentifiant().toLocal8Bit().constData(), r.value(0).toString().toLocal8Bit().constData());
+            QTableWidgetItem* status = new QTableWidgetItem(r2.next() ? "EN OFFRE" : "LIBRE");
+            ui->listTrotti->setItem(row_count, 3, status);
+        }
+    }
+
+    ui->louer->setDisabled(true);
 }
 
 ViewListeTrottinette::~ViewListeTrottinette()

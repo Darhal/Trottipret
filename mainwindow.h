@@ -28,11 +28,10 @@ public:
     {
         LOGIN = 0x0,
         SIGNUP = 0x1,
-        OFFRE_LOCATION = 0x2,
-        VIEW_OFFRE_LOCATION = 0x3,
-        VIEW_LISTE_TROTTI = 0x4,
-        VIEW_ALL_OFFRE = 0x5,
-        VIEW_ACTIVE_LOCATIONS = 0x6,
+        VIEW_OFFRE_LOCATION = 0x2,
+        VIEW_LISTE_TROTTI = 0x3,
+        VIEW_ALL_OFFRE = 0x4,
+        VIEW_ACTIVE_LOCATIONS = 0x5,
     };
 
     /**

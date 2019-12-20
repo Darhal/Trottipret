@@ -39,7 +39,8 @@ SOURCES += \
     Core/applicationmanager.cpp \
     View/viewlistoffrelocation.cpp \
     View/viewlistetrottinette.cpp \
-    View/viewalloffre.cpp
+    View/viewalloffre.cpp \
+    View/viewaddtrottinette.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -55,7 +56,8 @@ HEADERS += \
     Core/applicationmanager.h \
     View/viewlistoffrelocation.h \
     View/viewlistetrottinette.h \
-    View/viewalloffre.h
+    View/viewalloffre.h \
+    View/viewaddtrottinette.h
 
 FORMS += \
         mainwindow.ui \
@@ -64,4 +66,5 @@ FORMS += \
     View/viewconnection.ui \
     View/viewlistoffrelocation.ui \
     View/viewlistetrottinette.ui \
-    View/viewalloffre.ui
+    View/viewalloffre.ui \
+    View/viewaddtrottinette.ui

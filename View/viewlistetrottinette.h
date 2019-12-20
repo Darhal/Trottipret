@@ -20,6 +20,7 @@ public:
     explicit ViewListeTrottinette(QWidget *parent = 0);
     ~ViewListeTrottinette();
 
+    void RefreshList();
 private slots:
     void OnRowSelection();
 private:

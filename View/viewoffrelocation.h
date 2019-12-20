@@ -17,7 +17,7 @@ class ViewOffreLocation : public QDialog
     Q_OBJECT
 
 public:
-    explicit ViewOffreLocation(QWidget *parent = 0); // constructeur
+    explicit ViewOffreLocation(const QString& ref_trotti, QWidget *parent = 0); // constructeur
 
     ~ViewOffreLocation(); //destructeur
 
@@ -32,7 +32,7 @@ private slots:
 
 private:
     Ui::ViewOffreLocation* ui;
-    QString m_ImageFilePath;
+    QString m_RefTrotti;
 };
 
 #endif // VIEWOFFRELOCATION_H

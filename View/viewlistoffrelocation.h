@@ -24,6 +24,8 @@ public:
     explicit ViewListOffreLocation(QWidget *parent = 0);
     ~ViewListOffreLocation();
 
+    void RefreshList();
+
 private:
     Ui::ViewListOffreLocation *ui;
 };
