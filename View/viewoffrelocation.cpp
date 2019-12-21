@@ -1,10 +1,10 @@
 #include "viewoffrelocation.h"
 #include "ui_viewoffrelocation.h"
 #include <QMessageBox>
-#include <Core/databasemanager.h>
-#include <Core/applicationmanager.h>
 #include <qdebug.h>
 #include <QFileDialog>
+#include <Core/databasemanager.h>
+#include <Core/applicationmanager.h>
 #include <View/viewlistetrottinette.h>
 
 // Constructeur

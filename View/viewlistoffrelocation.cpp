@@ -4,6 +4,7 @@
 #include "Core/databasemanager.h"
 #include <qdebug.h>
 #include <QTimer>
+#include <QMessageBox>
 
 ViewListOffreLocation::ViewListOffreLocation(QWidget *parent) :
     QDialog(parent),
@@ -22,14 +23,17 @@ ViewListOffreLocation::ViewListOffreLocation(QWidget *parent) :
         Utilisateur* cur_user = ApplicationManager::GetInstance().GetCurrentUser();
 
         if (cur_user!=NULL){
-            DatabaseManager::GetInstance()
-                    .Exec("DELETE FROM locations WHERE ref_trotti='%s' AND identifiant='%s';",
-                            ref.toLocal8Bit().constData(), cur_user->GetIdentifiant().toLocal8Bit().constData()
-                         );
-            ui->info->setStyleSheet("color:green;");
-            ui->info->setText("INFORMATIONS: Offre Location deleted sucessfully.");
-            //QTimer::singleShot(200, this, SLOT([this](){ui->info->setText("");}));
-            this->RefreshList();
+            QMessageBox::StandardButton reply = QMessageBox::question(this, "Confirmation", "Etes-vous sur que vous voulez supprimer l'offre de location ?", QMessageBox::Yes|QMessageBox::No);
+            if (reply == QMessageBox::Yes) {
+                DatabaseManager::GetInstance()
+                        .Exec("DELETE FROM locations WHERE ref_trotti='%s' AND identifiant='%s';",
+                                ref.toLocal8Bit().constData(), cur_user->GetIdentifiant().toLocal8Bit().constData()
+                             );
+                ui->info->setStyleSheet("color:green;");
+                ui->info->setText("INFORMATIONS: Offre Location deleted sucessfully.");
+                //QTimer::singleShot(200, this, SLOT([this](){ui->info->setText("");}));
+                this->RefreshList();
+            }
         }
     });
     connect(ui->tableOffLoc, &QTableWidget::itemChanged, this,

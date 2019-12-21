@@ -5,6 +5,7 @@
 #include <qdebug.h>
 #include <View/viewoffrelocation.h>
 #include <View/viewaddtrottinette.h>
+#include <QMessageBox>
 
 ViewListeTrottinette::ViewListeTrottinette(QWidget *parent) :
     QDialog(parent),
@@ -36,15 +37,18 @@ ViewListeTrottinette::ViewListeTrottinette(QWidget *parent) :
         Utilisateur* cur_user = ApplicationManager::GetInstance().GetCurrentUser();
 
         if (cur_user && status != "EN LOCATION"){
-            DatabaseManager::GetInstance()
-                    .Exec("DELETE FROM trottinettes WHERE ref_trotti='%s' AND identifiant='%s';",
-                            ref.toLocal8Bit().constData(), cur_user->GetIdentifiant().toLocal8Bit().constData()
-                         );
-            DatabaseManager::GetInstance()
-                    .Exec("DELETE FROM locations WHERE ref_trotti='%s' AND identifiant='%s';",
-                            ref.toLocal8Bit().constData(), cur_user->GetIdentifiant().toLocal8Bit().constData()
-                         );
-            this->RefreshList();
+            QMessageBox::StandardButton reply = QMessageBox::question(this, "Confirmation", "Etes-vous sur que vous voulez supprimer la trotinette par conséquence supprimer l'offre de location eventuel associer?", QMessageBox::Yes|QMessageBox::No);
+            if (reply == QMessageBox::Yes) {
+                DatabaseManager::GetInstance()
+                        .Exec("DELETE FROM trottinettes WHERE ref_trotti='%s' AND identifiant='%s';",
+                                ref.toLocal8Bit().constData(), cur_user->GetIdentifiant().toLocal8Bit().constData()
+                             );
+                DatabaseManager::GetInstance()
+                        .Exec("DELETE FROM locations WHERE ref_trotti='%s' AND identifiant='%s';",
+                                ref.toLocal8Bit().constData(), cur_user->GetIdentifiant().toLocal8Bit().constData()
+                             );
+                this->RefreshList();
+            }
         }
     });
     connect(ui->listTrotti, SIGNAL(clicked(const QModelIndex&)), this, SLOT(OnRowSelection()));

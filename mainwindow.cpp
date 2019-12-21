@@ -11,6 +11,7 @@
 #include "Core/applicationmanager.h"
 #include <QMessageBox>
 #include <View/viewlistetrottinette.h>
+#include <View/viewlocations.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -82,7 +83,7 @@ void MainWindow::OpenDialogWindow(int dialog_id)
         dialog_wnd = new ViewAllOffre(this);
         break;
     case DialogWindow::VIEW_ACTIVE_LOCATIONS:
-        // dialog_wnd = new ViewListeTrottinette(this);
+        dialog_wnd = new ViewLocations(this);
         break;
     default:
         return;
