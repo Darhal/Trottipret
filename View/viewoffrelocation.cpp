@@ -23,7 +23,7 @@ bool ViewOffreLocation::VerifyData()
         return false;
     }
 
-    QSqlQuery& res = DatabaseManager::GetInstance().Exec("SELECT * FROM offrelocations WHERE ref_trotti = %s", m_RefTrotti.toLocal8Bit().constData());
+    QSqlQuery& res = DatabaseManager::GetInstance().Exec("SELECT * FROM locations WHERE ref_trotti = %s", m_RefTrotti.toLocal8Bit().constData());
 
     if (res.next()){ // Il ya des resultats alors return false et print l'error
         ui->warning->setText("La référence de la trottinette existe \ndéjà dans la base de données.");
@@ -43,8 +43,8 @@ void ViewOffreLocation::SubmitOffre()
 
     DatabaseManager::GetInstance().
         Exec(
-                "INSERT INTO offrelocations (identifiant, ref_trotti, date_debut, date_fin, lieu_debut, lieu_fin, prix_caution)"
-                "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', %f);",
+                "INSERT INTO locations (identifiant, ref_trotti, date_debut, date_fin, lieu_debut, lieu_fin, prix_caution, locataire)"
+                "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', %f, NULL);",
                 ApplicationManager::GetInstance().GetCurrentUser()->GetIdentifiant().toLocal8Bit().constData(),
                 m_RefTrotti.toLocal8Bit().constData(),
                 date_debut.toLocal8Bit().constData(),

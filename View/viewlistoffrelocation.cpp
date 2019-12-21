@@ -23,12 +23,12 @@ ViewListOffreLocation::ViewListOffreLocation(QWidget *parent) :
 
         if (cur_user!=NULL){
             DatabaseManager::GetInstance()
-                    .Exec("DELETE FROM offrelocations WHERE ref_trotti='%s' AND identifiant='%s' ;",
+                    .Exec("DELETE FROM locations WHERE ref_trotti='%s' AND identifiant='%s';",
                             ref.toLocal8Bit().constData(), cur_user->GetIdentifiant().toLocal8Bit().constData()
                          );
             ui->info->setStyleSheet("color:green;");
             ui->info->setText("INFORMATIONS: Offre Location deleted sucessfully.");
-            QTimer::singleShot(200, this, SLOT([this](){ui->info->setText("");}));
+            //QTimer::singleShot(200, this, SLOT([this](){ui->info->setText("");}));
             this->RefreshList();
         }
     });
@@ -43,31 +43,31 @@ ViewListOffreLocation::ViewListOffreLocation(QWidget *parent) :
                 break;
             case DATE_DEBUT:
                 DatabaseManager::GetInstance()
-                        .Exec("UPDATE offrelocations SET date_debut = '%s' WHERE ref_trotti='%s' AND identifiant='%s' ;",
+                        .Exec("UPDATE locations SET date_debut = '%s' WHERE ref_trotti='%s' AND identifiant='%s' ;",
                                 updated_text.toLocal8Bit().constData(), ref.toLocal8Bit().constData(), idf.toLocal8Bit().constData()
                              );
                 break;
             case DATE_FIN:
                 DatabaseManager::GetInstance()
-                        .Exec("UPDATE offrelocations SET date_fin = '%s' WHERE ref_trotti='%s' AND identifiant='%s';",
+                        .Exec("UPDATE locations SET date_fin = '%s' WHERE ref_trotti='%s' AND identifiant='%s';",
                                 updated_text.toLocal8Bit().constData(), ref.toLocal8Bit().constData(), idf.toLocal8Bit().constData()
                               );
                 break;
             case LIEU_DEBUT:
                 DatabaseManager::GetInstance()
-                        .Exec("UPDATE offrelocations SET lieu_debut = '%s' WHERE ref_trotti='%s' AND identifiant='%s';",
+                        .Exec("UPDATE locations SET lieu_debut = '%s' WHERE ref_trotti='%s' AND identifiant='%s';",
                                 updated_text.toLocal8Bit().constData(), ref.toLocal8Bit().constData(), idf.toLocal8Bit().constData()
                               );
                 break;
             case LIEU_FIN:
                 DatabaseManager::GetInstance()
-                        .Exec("UPDATE offrelocations SET lieu_fin = '%s' WHERE ref_trotti='%s' AND identifiant='%s';",
+                        .Exec("UPDATE locations SET lieu_fin = '%s' WHERE ref_trotti='%s' AND identifiant='%s';",
                                 updated_text.toLocal8Bit().constData(), ref.toLocal8Bit().constData(), idf.toLocal8Bit().constData()
                              );
                 break;
             case PRIX:
                 DatabaseManager::GetInstance()
-                        .Exec("UPDATE offrelocations SET prix_caution = %lf WHERE ref_trotti='%s' AND identifiant='%s';",
+                        .Exec("UPDATE locations SET prix_caution = %lf WHERE ref_trotti='%s' AND identifiant='%s';",
                                 updated_text.toLocal8Bit().constData(), ref.toLocal8Bit().constData(), idf.toLocal8Bit().constData()
                              );
                 break;
@@ -85,7 +85,7 @@ void ViewListOffreLocation::RefreshList()
 
     if (cur_user != NULL){
         QSqlQuery r = std::move(DatabaseManager::GetInstance()
-                .Exec("SELECT * FROM offrelocations WHERE identifiant='%s';", cur_user->GetIdentifiant().toLocal8Bit().constData()));
+                .Exec("SELECT * FROM locations WHERE identifiant = '%s' AND locataire is NULL;", cur_user->GetIdentifiant().toLocal8Bit().constData()));
 
         while (r.next()){
             int row_count = ui->tableOffLoc->rowCount();

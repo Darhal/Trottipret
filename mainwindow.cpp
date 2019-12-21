@@ -88,10 +88,12 @@ void MainWindow::OpenDialogWindow(int dialog_id)
         return;
     }
 
-    dialog_wnd->setAttribute(Qt::WA_DeleteOnClose); // Il y a pas de free (delete).
-                                                    // Cela va liberer la memoire automatiquement
-                                                    // à la fermuture
-    dialog_wnd->show(); // Affiche notre boîte de dialogue
+    if (dialog_wnd){
+        dialog_wnd->setAttribute(Qt::WA_DeleteOnClose); // Il y a pas de free (delete).
+                                                        // Cela va liberer la memoire automatiquement
+                                                        // à la fermuture
+        dialog_wnd->show(); // Affiche notre boîte de dialogue
+    }
 }
 
 MainWindow::~MainWindow()

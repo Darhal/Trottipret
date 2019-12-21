@@ -40,7 +40,7 @@ void DatabaseManager::InitilizeDatabase()
     );
 
     this->Exec(
-        "CREATE TABLE IF NOT EXISTS offrelocations"
+        "CREATE TABLE IF NOT EXISTS locations"
         "(identifiant TEXT NOT NULL,"
         "ref_trotti TEXT NOT NULL,"
         "date_debut DATE, "
@@ -48,21 +48,11 @@ void DatabaseManager::InitilizeDatabase()
         "lieu_debut TEXT, "
         "lieu_fin TEXT, "
         "prix_caution FLOAT,"
+        "locataire TEXT,"
         "PRIMARY KEY (identifiant, ref_trotti),"
         "FOREIGN KEY (identifiant) REFERENCES utilisateurs(identifiant),"
-        "FOREIGN KEY (ref_trotti) REFERENCES trottinettes(ref_trotti)"
-        ");"
-    );
-
-    this->Exec(
-        "CREATE TABLE IF NOT EXISTS locations"
-        "(proprio TEXT NOT NULL,"
-        "ref_trotti TEXT NOT NULL,"
-        "locataire TEXT NOT NULL, "
-        "PRIMARY KEY (proprio, ref_trotti, locataire),"
-        "FOREIGN KEY (proprio) REFERENCES utilisateurs(proprio),"
         "FOREIGN KEY (ref_trotti) REFERENCES trottinettes(ref_trotti),"
-        "FOREIGN KEY (locataire) REFERENCES utilisateurs(locataire)"
+        "FOREIGN KEY (locataire) REFERENCES utilisateurs(identifiant)"
         ");"
     );
 }
