@@ -88,7 +88,7 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="louer">
       <property name="text">
        <string>Louer</string>
       </property>

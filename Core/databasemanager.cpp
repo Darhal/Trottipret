@@ -59,7 +59,7 @@ void DatabaseManager::InitilizeDatabase()
         "(proprio TEXT NOT NULL,"
         "ref_trotti TEXT NOT NULL,"
         "locataire TEXT NOT NULL, "
-        "PRIMARY KEY (proprio, ref_trotti),"
+        "PRIMARY KEY (proprio, ref_trotti, locataire),"
         "FOREIGN KEY (proprio) REFERENCES utilisateurs(proprio),"
         "FOREIGN KEY (ref_trotti) REFERENCES trottinettes(ref_trotti),"
         "FOREIGN KEY (locataire) REFERENCES utilisateurs(locataire)"

@@ -12,7 +12,16 @@ ViewAllOffre::ViewAllOffre(QWidget *parent) :
     ui->all_offers->verticalHeader()->hide();
     ui->all_offers->setSelectionBehavior((QAbstractItemView::SelectRows));
     ui->all_offers->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    this->RefreshList();
 
+    connect(ui->fermer, &QPushButton::clicked, this, [this](){this->close();});
+    connect(ui->louer, &QPushButton::clicked, this, [this](){
+
+    });
+}
+
+void ViewAllOffre::RefreshList()
+{
     Utilisateur* cur_user = ApplicationManager::GetInstance().GetCurrentUser();
     QSqlQuery* r = NULL;
     if (cur_user != NULL){
@@ -32,8 +41,6 @@ ViewAllOffre::ViewAllOffre(QWidget *parent) :
             ui->all_offers->setItem(row_count, i, item);
         }
     }
-
-    connect(ui->fermer, &QPushButton::clicked, this, [this](){this->close();});
 }
 
 ViewAllOffre::~ViewAllOffre()

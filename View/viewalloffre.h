@@ -15,6 +15,8 @@ public:
     explicit ViewAllOffre(QWidget *parent = 0);
     ~ViewAllOffre();
 
+    void RefreshList();
+
 private:
     Ui::ViewAllOffre *ui;
 };
