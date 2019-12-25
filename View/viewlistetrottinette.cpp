@@ -6,6 +6,8 @@
 #include <View/viewoffrelocation.h>
 #include <View/viewaddtrottinette.h>
 #include <QMessageBox>
+#include <QFile>
+#include <QFileDialog>
 
 ViewListeTrottinette::ViewListeTrottinette(QWidget *parent) :
     QDialog(parent),
@@ -78,6 +80,58 @@ ViewListeTrottinette::ViewListeTrottinette(QWidget *parent) :
             };
         }
     );
+    connect(ui->fullView, &QPushButton::clicked, this, [this](){
+        QModelIndex index = ui->listTrotti->currentIndex();
+        int i = index.row();
+        QString ref = ui->listTrotti->item(i, 0)->text();
+
+        QSqlQuery& r = DatabaseManager::GetInstance()
+                .Exec("SELECT image FROM trottinettes WHERE ref_trotti = '%s';", ref.toLocal8Bit().constData());
+
+        if (r.first()){
+            QByteArray image_bytes = r.value(0).toByteArray();
+            QPixmap img_pixmap = QPixmap();
+            img_pixmap.loadFromData( std::move(image_bytes) );
+
+            QLabel* img = new QLabel(this); // creation d'une label
+            img->setAttribute( Qt::WA_DeleteOnClose, true ); // pas besoin de free ca va free automatiquement on fermuture de la fenetre
+            img->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
+            img->setWindowFlags(Qt::Window); // transformer en une fentre
+            img->setPixmap(img_pixmap); // construire l'image
+            img->show(); // affichage
+        }
+    });
+
+    connect(ui->editPic, &QPushButton::clicked, this, [this](){
+        QString m_ImageFilePath = QFileDialog::getOpenFileName(this, tr("Choose Image"), "", tr("Image Files (*.png *.jpg *.bmp)"));
+        QModelIndex index = ui->listTrotti->currentIndex();
+        int i = index.row();
+        QString ref = ui->listTrotti->item(i, 0)->text();
+        QFile img(m_ImageFilePath);
+
+        if (!img.open(QIODevice::ReadOnly)) {
+            QMessageBox::critical(
+                this,
+                tr("Error lors de l'ouverture de l'image"),
+                QString("ERROR: Impossible d'ouvrir l'image que vous avez sélectionnée.")
+            );
+            return;
+        }
+        QByteArray buffer_byte_array = img.readAll();
+        DatabaseManager::GetInstance().Prepare("UPDATE trottinettes SET image = :imageData WHERE ref_trotti = '%s';",
+            ref.toLocal8Bit().constData()
+        );
+        DatabaseManager::GetInstance().BindValue(":imageData", buffer_byte_array);
+        DatabaseManager::GetInstance().Exec();
+        ui->imageTrotti->setPixmap(QPixmap(m_ImageFilePath));
+
+        // Petite fenêtre pour informer l'utilisateur que tout va bien
+        QMessageBox::information(
+            this,
+            tr("Modification De L'Image Trottinette"),
+            QString("L'image a été mise à jour avec succès.")
+        );
+    });
 }
 
 void ViewListeTrottinette::OnRowSelection()

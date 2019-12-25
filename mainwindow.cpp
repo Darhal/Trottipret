@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // manager.StartApplication();
     ui->setupUi(this); // Initialise le UI
 
+    ToggleButtons(false); // Disable all buttons when logout
     signalMapper  = new QSignalMapper{ this }; // Allocation dynamique de mon signal mapper
                                                // Ceci doit être alloué dynamiquement
                                                // sinon rien ne fonctionnera
@@ -43,6 +44,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Connecte notre signalMap.
     connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(OpenDialogWindow(int)));
+
+    connect(ui->LogOut, &QPushButton::clicked, this, [this](){
+        ApplicationManager::GetInstance().SetCurrentUser(nullptr);
+        ui->connected_user->setStyleSheet("color: red;");
+        ui->connected_user->setText("Utilisateur Anonyme, vous n'êtes pas connecté.");
+        this->ToggleButtons(false);
+    });
 }
 
 
@@ -95,6 +103,15 @@ void MainWindow::OpenDialogWindow(int dialog_id)
                                                         // à la fermuture
         dialog_wnd->show(); // Affiche notre boîte de dialogue
     }
+}
+
+void MainWindow::ToggleButtons(bool b)
+{
+    ui->ListOffreLocButton->setEnabled(b);
+    ui->ListeTrottiButton->setEnabled(b);
+    ui->ActiveLocationButton->setEnabled(b);
+    ui->MyProfile->setEnabled(b);
+    ui->LogOut->setEnabled(b);
 }
 
 MainWindow::~MainWindow()

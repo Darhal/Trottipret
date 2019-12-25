@@ -14,6 +14,7 @@ ViewListOffreLocation::ViewListOffreLocation(QWidget *parent) :
     ui->tableOffLoc->verticalHeader()->hide();
     ui->tableOffLoc->setSelectionBehavior((QAbstractItemView::SelectRows));
     ui->tableOffLoc->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->info->setWordWrap(true);
     this->RefreshList();
 
     connect(ui->fermer, &QPushButton::clicked, this, [this](){this->close();});

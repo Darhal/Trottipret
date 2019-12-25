@@ -13,17 +13,30 @@ ViewAddTrottinette::ViewAddTrottinette(QWidget *parent) :
     ui(new Ui::ViewAddTrottinette)
 {
     ui->setupUi(this);
+    ui->img_label->setWordWrap(true);
 
     connect(ui->choisirPhoto, &QPushButton::clicked, [this](){
         m_ImageFilePath = QFileDialog::getOpenFileName(this,
                tr("Choose Image"), "", tr("Image Files (*.png *.jpg *.bmp)"));
+        ui->img_label->setText("Image: "+m_ImageFilePath);
+    });
+
+    connect(ui->voirPhoto, &QPushButton::clicked, this, [this](){
+        if (m_ImageFilePath != ""){
+            QLabel* img = new QLabel(this); // creation d'une label
+            img->setAttribute( Qt::WA_DeleteOnClose, true ); // pas besoin de free ca va free automatiquement on fermuture de la fenetre
+            img->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
+            img->setWindowFlags(Qt::Window); // transformer en une fentre
+            img->setPixmap(QPixmap(m_ImageFilePath, 0, Qt::AutoColor)); // construire l'image
+            img->show(); // affichage
+        }
     });
 }
 
 bool ViewAddTrottinette::VerifyData()
 {
     if (ApplicationManager::GetInstance().GetCurrentUser() == NULL){
-        ui->warning->setText("Cette fonction n'est pas disponible lorsque vous n'êtes pas connecté.");
+        ui->warning->setText("ERROR: Cette fonction n'est pas disponible lorsque vous n'êtes pas connecté.");
         return false;
     }
 
@@ -31,7 +44,7 @@ bool ViewAddTrottinette::VerifyData()
     QSqlQuery& res = DatabaseManager::GetInstance().Exec("SELECT * FROM trottinettes WHERE ref_trotti = '%s'", ref.toLocal8Bit().constData());
 
     if (res.next()){ // Il ya des resultats alors return false et print l'error
-        ui->warning->setText("La référence de la trottinette existe déjà \ndans la base de données.");
+        ui->warning->setText("ERROR: La référence de la trottinette existe déjà dans la base de données.");
         return false;
     }
 
@@ -48,7 +61,7 @@ void ViewAddTrottinette::SubmitData()
         QFile img(m_ImageFilePath);
 
         if (!img.open(QIODevice::ReadOnly)) {
-            qDebug() << "Cant open file!";
+            ui->warning->setText("ERROR: Impossible d'ouvrir l'image que vous avez sélectionnée.");
             return;
         }
         QByteArray buffer_byte_array = img.readAll();
@@ -82,7 +95,7 @@ void ViewAddTrottinette::SubmitData()
     // Petite fenêtre pour informer l'utilisateur que tout va bien
     QMessageBox::information(
         this,
-        tr("AJouter Une Trottinette"),
+        tr("Ajouter Une Trottinette"),
         QString("Votre trotinette a été bien ajouté dans notre base de donées.")
     );
 

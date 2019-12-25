@@ -113,23 +113,23 @@
    <property name="geometry">
     <rect>
      <x>560</x>
-     <y>360</y>
+     <y>350</y>
      <width>351</width>
-     <height>31</height>
+     <height>42</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QPushButton" name="fullView">
       <property name="text">
-       <string>See Full Picture</string>
+       <string>Voir L'Image Complète</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="editPic">
       <property name="text">
-       <string>Edit Picture</string>
+       <string>Modifier L'Image</string>
       </property>
      </widget>
     </item>

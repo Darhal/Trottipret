@@ -56,6 +56,8 @@ public:
 
     void closeEvent(QCloseEvent* event) override;
 
+    void ToggleButtons(bool b);
+
 private slots:
     /**
      * @brief Fonction pour ouvrir les boîtes de dialogue

@@ -39,7 +39,7 @@
       <widget class="QTableWidget" name="all_offers">
        <column>
         <property name="text">
-         <string>Proposed By</string>
+         <string>Proposé par</string>
         </property>
        </column>
        <column>

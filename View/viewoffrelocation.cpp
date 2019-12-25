@@ -14,6 +14,7 @@ ViewOffreLocation::ViewOffreLocation(const QString& ref_trotti, QWidget *parent)
     m_RefTrotti(ref_trotti)
 {
     ui->setupUi(this);
+    ui->warning->setWordWrap(true);
 }
 
 bool ViewOffreLocation::VerifyData()

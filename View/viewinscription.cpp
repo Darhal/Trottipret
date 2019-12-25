@@ -11,6 +11,7 @@ ViewInscription::ViewInscription(QWidget *parent) :
     ui(new Ui::ViewInscription)
 {
     ui->setupUi(this);
+    ui->warning->setWordWrap(true);
 }
 
 bool ViewInscription::VerifySignupInformations()
@@ -29,22 +30,21 @@ bool ViewInscription::VerifySignupInformations()
         mailREX.setCaseSensitivity(Qt::CaseInsensitive);
         mailREX.setPatternSyntax(QRegExp::RegExp);
         if (!mailREX.exactMatch(email)){ // Si ça ne correspond pas au regex alors retourne faux et affiche error
-            ui->warning->setText("INFORMATIONS INVALIDES: Veuillez verifier\nque l'adresse mail est correcte.");
+            ui->warning->setText("INFORMATIONS INVALIDES: Veuillez verifier que l'adresse mail est correcte.");
             return false;
         }
 
         // Effectue une requête sur la base de données avec le nom d'utilisateur donné pour
         // vérifier si l'utilisateur existe déjà
-        QSqlQuery& r = DatabaseManager::GetInstance()
-                .Exec("SELECT * FROM utilisateurs WHERE identifiant='%s';", idf.toLocal8Bit().constData());
+        QSqlQuery& r = DatabaseManager::GetInstance().Exec("SELECT * FROM utilisateurs WHERE identifiant='%s';", idf.toLocal8Bit().constData());
         if (r.next()){ // Il ya des resultats alors return false et print l'error
-            ui->warning->setText("IDENTIFIANT DEJA UTILISE: Veuillez en choisir\nun autre.");
+            ui->warning->setText("IDENTIFIANT DEJA UTILISE: Veuillez en choisir un autre.");
             return false;
         }
 
         return true; // tout est bon, on peut faire le signup
     }else{ // l'un des champs est vide
-        ui->warning->setText("INFORMATIONS MANQUANTES \nVeuillez renseigner :\nl'identifiant,  l'adresse mail et le mot de passe.");
+        ui->warning->setText("INFORMATIONS MANQUANTES: Veuillez renseigner l'identifiant, l'adresse mail et le mot de passe.");
         return false;
     }
 }

@@ -41,7 +41,8 @@ SOURCES += \
     View/viewlistetrottinette.cpp \
     View/viewalloffre.cpp \
     View/viewaddtrottinette.cpp \
-    View/viewlocations.cpp
+    View/viewlocations.cpp \
+    View/viewmyprofile.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -59,7 +60,8 @@ HEADERS += \
     View/viewlistetrottinette.h \
     View/viewalloffre.h \
     View/viewaddtrottinette.h \
-    View/viewlocations.h
+    View/viewlocations.h \
+    View/viewmyprofile.h
 
 FORMS += \
         mainwindow.ui \
@@ -70,4 +72,5 @@ FORMS += \
     View/viewlistetrottinette.ui \
     View/viewalloffre.ui \
     View/viewaddtrottinette.ui \
-    View/viewlocations.ui
+    View/viewlocations.ui \
+    View/viewmyprofile.ui
