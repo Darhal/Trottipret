@@ -27,6 +27,7 @@ SUBDIRS += \
     Trottipret.pro
 
 FORMS += \
+    mainwindow.ui \
     View/viewaddtrottinette.ui \
     View/viewalloffre.ui \
     View/viewconnection.ui \

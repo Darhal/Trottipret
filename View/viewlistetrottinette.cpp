@@ -162,9 +162,13 @@ void ViewListeTrottinette::OnRowSelection()
         QPixmap img_pixmap = QPixmap();
         img_pixmap.loadFromData( std::move(image_bytes) );
         ui->imageTrotti->setPixmap(img_pixmap);
+        ui->imageTrotti->setScaledContents( true );
+        ui->imageTrotti->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
     }else{
         QPixmap img_pixmap = QPixmap(":/Resources/Images/trotinette.png");
         ui->imageTrotti->setPixmap(img_pixmap);
+        ui->imageTrotti->setScaledContents( true );
+        ui->imageTrotti->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
     }
 }
 

@@ -113,11 +113,24 @@ void MainWindow::OpenDialogWindow(int dialog_id)
 
 void MainWindow::ToggleButtons(bool b)
 {
+    if (b){
+
+    }else{
+        QPixmap img_pixmap = QPixmap(":/Resources/Images/trotinette.png");
+        ui->imageTrotti->setPixmap(img_pixmap);
+        ui->imageTrotti->setScaledContents( true );
+        ui->imageTrotti->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
+    }
+
+
     ui->ListOffreLocButton->setEnabled(b);
     ui->ListeTrottiButton->setEnabled(b);
     ui->ActiveLocationButton->setEnabled(b);
     ui->MyProfile->setEnabled(b);
     ui->LogOut->setEnabled(b);
+
+    ui->ConnectionButton->setEnabled(!b);
+    ui->InscriptionButton->setEnabled(!b);
 }
 
 MainWindow::~MainWindow()

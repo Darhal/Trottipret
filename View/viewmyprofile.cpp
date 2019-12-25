@@ -17,6 +17,8 @@ ViewMyProfile::ViewMyProfile(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->warning->setWordWrap(true);
+    ui->tip->setWordWrap(true);
+    ui->idf->setAlignment(Qt::AlignCenter);
     Utilisateur* cur_usr = ApplicationManager::GetInstance().GetCurrentUser();
 
     if (cur_usr != nullptr){
@@ -62,6 +64,8 @@ void ViewMyProfile::SetAvatarPicture(QPixmap& img)
     img.setMask(mask);*/
 
     ui->avatar->setPixmap(img);
+    ui->avatar->setScaledContents( true );
+    ui->avatar->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
 }
 
 bool ViewMyProfile::VerifyInfo()

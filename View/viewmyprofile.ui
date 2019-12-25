@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>558</width>
-    <height>301</height>
+    <height>341</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>360</x>
-     <y>260</y>
+     <y>300</y>
      <width>191</width>
      <height>41</height>
     </rect>
@@ -35,7 +35,7 @@
      <x>10</x>
      <y>10</y>
      <width>541</width>
-     <height>241</height>
+     <height>281</height>
     </rect>
    </property>
    <property name="title">
@@ -45,7 +45,7 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>70</y>
+      <y>110</y>
       <width>381</width>
       <height>161</height>
      </rect>
@@ -121,9 +121,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>70</y>
+      <y>100</y>
       <width>131</width>
-      <height>121</height>
+      <height>131</height>
      </rect>
     </property>
     <property name="text">
@@ -134,10 +134,15 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>30</y>
-      <width>521</width>
-      <height>41</height>
+      <y>20</y>
+      <width>171</width>
+      <height>61</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:#00E676;
+font:bold;
+font-size:24;</string>
     </property>
     <property name="text">
      <string>Identifiant: </string>
@@ -147,7 +152,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>200</y>
+      <y>240</y>
       <width>131</width>
       <height>31</height>
      </rect>
@@ -156,12 +161,38 @@
      <string>Change Avatar</string>
     </property>
    </widget>
+   <widget class="QLabel" name="tip">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>30</y>
+      <width>341</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Astuce: si vous souhaitez modifier le mot de passe, supprimez ce qui se trouve déjà dans le champ et saisissez votre nouveau mot de passe, sinon conservez-le tel quel.</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>521</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
   </widget>
   <widget class="QLabel" name="warning">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>260</y>
+     <y>300</y>
      <width>361</width>
      <height>31</height>
     </rect>
