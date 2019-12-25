@@ -142,10 +142,13 @@
     <property name="styleSheet">
      <string notr="true">color:#00E676;
 font:bold;
-font-size:24;</string>
+font-size:16px;</string>
     </property>
     <property name="text">
      <string>Identifiant: </string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QPushButton" name="changeAvatar">

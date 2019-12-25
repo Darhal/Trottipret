@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>421</width>
-    <height>536</height>
+    <height>546</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>130</y>
+      <y>140</y>
       <width>401</width>
       <height>351</height>
      </rect>
@@ -118,7 +118,7 @@
      <rect>
       <x>129</x>
       <y>10</y>
-      <width>281</width>
+      <width>532</width>
       <height>121</height>
      </rect>
     </property>
@@ -126,7 +126,9 @@
      <item>
       <widget class="QLabel" name="connected_user">
        <property name="styleSheet">
-        <string notr="true">color:red;</string>
+        <string notr="true">color:#FF5252;
+font: bold;
+font-size:12px;</string>
        </property>
        <property name="text">
         <string>Utilisateur Anonyme, vous n'êtes pas connecté.</string>
@@ -138,7 +140,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="avatar">
     <property name="geometry">
      <rect>
       <x>10</x>

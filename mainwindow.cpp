@@ -13,6 +13,7 @@
 #include <View/viewlistetrottinette.h>
 #include <View/viewlocations.h>
 #include <View/viewmyprofile.h>
+#include <Core/databasemanager.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -49,10 +50,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(OpenDialogWindow(int)));
 
     connect(ui->LogOut, &QPushButton::clicked, this, [this](){
-        ApplicationManager::GetInstance().SetCurrentUser(nullptr);
-        ui->connected_user->setStyleSheet("color: red;");
-        ui->connected_user->setText("Utilisateur Anonyme, vous n'êtes pas connecté.");
-        this->ToggleButtons(false);
+        Utilisateur* usr = ApplicationManager::GetInstance().GetCurrentUser();
+        delete usr; // free de l'utilisateur allouer dynamiquement
+        ApplicationManager::GetInstance().SetCurrentUser(nullptr); // assign to null
+        this->ToggleButtons(false); // update buttons on main window
     });
 }
 
@@ -114,12 +115,42 @@ void MainWindow::OpenDialogWindow(int dialog_id)
 void MainWindow::ToggleButtons(bool b)
 {
     if (b){
+        Utilisateur* cur_usr = ApplicationManager::GetInstance().GetCurrentUser();
 
+        if (cur_usr != nullptr){
+            QSqlQuery& r = DatabaseManager::GetInstance()
+                    .Exec("SELECT avatar FROM utilisateurs WHERE identifiant = '%s';", cur_usr->GetIdentifiant().toLocal8Bit().constData());
+
+            if (r.first() && r.value(0).toString() != ""){
+                QByteArray image_bytes = r.value(0).toByteArray();
+                QPixmap img_pixmap = QPixmap();
+                img_pixmap.loadFromData( std::move(image_bytes) );
+                ui->avatar->setPixmap(img_pixmap);
+                ui->avatar->setScaledContents( true );
+                ui->avatar->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
+            }else{
+                QPixmap img_pixmap = QPixmap(":/Resources/Images/user.png");
+                ui->avatar->setPixmap(img_pixmap);
+                ui->avatar->setScaledContents( true );
+                ui->avatar->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
+            }
+        }
+
+        ui->connected_user->setStyleSheet("color:#0091EA;"
+                                          "font: bold;"
+                                          "font-size:13px;");
+        ui->connected_user->setText(QString("  Connecté, utilisateur actuel: %1.").arg(cur_usr->GetIdentifiant()));
+        ui->connected_user->setAlignment(Qt::AlignLeft);
     }else{
-        QPixmap img_pixmap = QPixmap(":/Resources/Images/trotinette.png");
-        ui->imageTrotti->setPixmap(img_pixmap);
-        ui->imageTrotti->setScaledContents( true );
-        ui->imageTrotti->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
+        QPixmap img_pixmap = QPixmap(":/Resources/Images/anonymous.png");
+        ui->avatar->setPixmap(img_pixmap);
+        ui->avatar->setScaledContents( true );
+        ui->avatar->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
+        ui->connected_user->setStyleSheet("color:#FF5252;"
+                                          "font: bold;"
+                                          "font-size:13px;");
+        ui->connected_user->setText("Utilisateur Anonyme, vous n'êtes pas connecté.");
+        ui->connected_user->setAlignment(Qt::AlignLeft);
     }
 
 

@@ -2,5 +2,6 @@
     <qresource prefix="/Resources">
         <file>Images/user.png</file>
         <file>Images/trotinette.png</file>
+        <file>Images/anonymous.png</file>
     </qresource>
 </RCC>

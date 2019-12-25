@@ -36,15 +36,22 @@ void ViewLocations::RefreshList()
     if (cur_user != NULL){
         QSqlQuery r = std::move(DatabaseManager::GetInstance()
                 .Exec("SELECT * FROM locations WHERE locataire = '%s';", cur_user->GetIdentifiant().toLocal8Bit().constData()));
+        QDateTime right_now = QDateTime::fromString(QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss"), "yyyy-MM-dd HH:mm:ss");
 
         while (r.next()){
             int row_count = ui->location_tab->rowCount();
             ui->location_tab->insertRow(row_count);
+            QDateTime finish = QDateTime::fromString(r.value(3).toString(), "yyyy-MM-dd HH:mm:ss");
+            bool is_red = right_now > finish;
 
             for(int i = 0; i < 6; i++){
                 QTableWidgetItem* item = new QTableWidgetItem(r.value(i).toString());
                 item->setFlags(item->flags() ^ Qt::ItemIsEditable);
                 ui->location_tab->setItem(row_count, i, item);
+
+                if (is_red){
+                    item->setBackgroundColor(QColor (250,0,0));
+                }
             }
         }
     }

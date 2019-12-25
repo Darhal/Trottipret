@@ -6,6 +6,7 @@
 #include <Core/databasemanager.h>
 #include <Core/applicationmanager.h>
 #include <View/viewlistetrottinette.h>
+#include <QDoubleValidator>
 
 // Constructeur
 ViewOffreLocation::ViewOffreLocation(const QString& ref_trotti, QWidget *parent) :
@@ -15,19 +16,36 @@ ViewOffreLocation::ViewOffreLocation(const QString& ref_trotti, QWidget *parent)
 {
     ui->setupUi(this);
     ui->warning->setWordWrap(true);
+    ui->date_retour->setInputMask("99/99/9999 99:99:99");
+    ui->date_retrait->setInputMask("99/99/9999 99:99:99");
+    ui->prix_caution->setValidator( new QDoubleValidator(1, 4, 2, this) );
 }
 
 bool ViewOffreLocation::VerifyData()
 {
     if (ApplicationManager::GetInstance().GetCurrentUser() == NULL){
-        ui->warning->setText("Cette fonction n'est pas disponible lorsque vous n'êtes pas connecté.");
+        ui->warning->setText("ERROR : Cette fonction n'est pas disponible lorsque vous n'êtes pas connecté.");
         return false;
     }
 
     QSqlQuery& res = DatabaseManager::GetInstance().Exec("SELECT * FROM locations WHERE ref_trotti = %s", m_RefTrotti.toLocal8Bit().constData());
 
     if (res.next()){ // Il ya des resultats alors return false et print l'error
-        ui->warning->setText("La référence de la trottinette existe \ndéjà dans la base de données.");
+        ui->warning->setText("Informations Incorrectes : La référence de la trottinette existe déjà dans la base de données.");
+        return false;
+    }
+
+    QDateTime date_debut = QDateTime::fromString(ui->date_retrait->text(), "dd/MM/yyyy HH:mm:ss");
+    QDateTime date_fin = QDateTime::fromString(ui->date_retour->text(), "dd/MM/yyyy HH:mm:ss");
+    QDateTime right_now = QDateTime::fromString(QDateTime::currentDateTime().toString("dd/MM/yyyy HH:mm:ss"), "dd/MM/yyyy HH:mm:ss");
+
+    if (date_fin < right_now || date_debut < right_now){
+        ui->warning->setText("Informations Incorrectes : La date et l'heure actuelles doivent être antérieures à la date de fin et à la date de debut.");
+        return false;
+    }
+
+    if (date_debut > date_fin){
+        ui->warning->setText("Informations Incorrectes : La date de début doit être antérieure à la date de fin.");
         return false;
     }
 
@@ -41,6 +59,10 @@ void ViewOffreLocation::SubmitOffre()
     QString lieu_debut = ui->lieu_retrait->text();
     QString lieu_fin = ui->lieu_retour->text();
     float prix_caution = ui->prix_caution->text().toDouble();
+
+    // Conversion de la date en ISO-8601
+    date_debut = QDateTime::fromString(date_debut, "dd/MM/yyyy HH:mm:ss").toString("yyyy-MM-dd HH:mm:ss");
+    date_fin = QDateTime::fromString(date_fin, "dd/MM/yyyy HH:mm:ss").toString("yyyy-MM-dd HH:mm:ss");
 
     DatabaseManager::GetInstance().
         Exec(

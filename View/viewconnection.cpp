@@ -71,9 +71,6 @@ void ViewConnection::FinishLogin()
     QDialog::accept(); // ferme la fenêtre de dialog
     // Recupere le label de main window et le change en vert avec l'identifant de l'utilistauer actuel
     MainWindow* parent = ((MainWindow*)(this->parent()));
-    QLabel* user = parent->GetUI()->connected_user;
-    user->setStyleSheet("color: green;");
-    user->setText(QString("Connecté, utilisateur actuel: %1.").arg(idf));
     parent->ToggleButtons(true);
 }
 
