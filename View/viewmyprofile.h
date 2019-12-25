@@ -15,8 +15,17 @@ public:
     explicit ViewMyProfile(QWidget *parent = 0);
     ~ViewMyProfile();
 
+    void SetAvatarPicture(QPixmap& img);
+
+    bool VerifyInfo();
+
+    void FinishEdit();
+private slots:
+    void accept();
+
 private:
     Ui::ViewMyProfile *ui;
+    QString m_AvatarPath;
 };
 
 #endif // VIEWMYPROFILE_H

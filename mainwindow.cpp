@@ -12,6 +12,7 @@
 #include <QMessageBox>
 #include <View/viewlistetrottinette.h>
 #include <View/viewlocations.h>
+#include <View/viewmyprofile.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -33,6 +34,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->ListeTrottiButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
     connect(ui->AllOffreButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
     connect(ui->ActiveLocationButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
+    connect(ui->MyProfile, SIGNAL(clicked()), signalMapper, SLOT(map()));
 
      // Initialise nos buttons avec leur attribus.
     signalMapper->setMapping(ui->InscriptionButton, DialogWindow::SIGNUP);
@@ -41,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent) :
     signalMapper->setMapping(ui->ListeTrottiButton, DialogWindow::VIEW_LISTE_TROTTI);
     signalMapper->setMapping(ui->AllOffreButton, DialogWindow::VIEW_ALL_OFFRE);
     signalMapper->setMapping(ui->ActiveLocationButton, DialogWindow::VIEW_ACTIVE_LOCATIONS);
+    signalMapper->setMapping(ui->MyProfile, DialogWindow::VIEW_PROFILE);
 
     // Connecte notre signalMap.
     connect(signalMapper, SIGNAL(mapped(int)), this, SLOT(OpenDialogWindow(int)));
@@ -92,6 +95,9 @@ void MainWindow::OpenDialogWindow(int dialog_id)
         break;
     case DialogWindow::VIEW_ACTIVE_LOCATIONS:
         dialog_wnd = new ViewLocations(this);
+        break;
+    case DialogWindow::VIEW_PROFILE:
+        dialog_wnd = new ViewMyProfile(this);
         break;
     default:
         return;

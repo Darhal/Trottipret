@@ -30,6 +30,7 @@ private slots:
 
 private:
     Ui::ViewInscription *ui;
+    QString m_PathAvatar;
 };
 
 #endif // VIEWINSCRIPTION_H

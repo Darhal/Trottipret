@@ -32,6 +32,7 @@ public:
         VIEW_LISTE_TROTTI = 0x3,
         VIEW_ALL_OFFRE = 0x4,
         VIEW_ACTIVE_LOCATIONS = 0x5,
+        VIEW_PROFILE = 0x6,
     };
 
     /**

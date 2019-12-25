@@ -157,7 +157,7 @@ void ViewListeTrottinette::OnRowSelection()
     QSqlQuery& r = DatabaseManager::GetInstance()
             .Exec("SELECT image FROM trottinettes WHERE ref_trotti = '%s';", ref.toLocal8Bit().constData());
 
-    if (r.first()){
+    if (r.first() && r.value(0).toString() != ""){
         QByteArray image_bytes = r.value(0).toByteArray();
         QPixmap img_pixmap = QPixmap();
         img_pixmap.loadFromData( std::move(image_bytes) );

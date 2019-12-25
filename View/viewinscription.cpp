@@ -4,6 +4,7 @@
 #include <QMessageBox>
 #include <QCryptographicHash>
 #include <Core/databasemanager.h>
+#include <QFileDialog>
 
 // Ctor fourni par Qt
 ViewInscription::ViewInscription(QWidget *parent) :
@@ -12,6 +13,12 @@ ViewInscription::ViewInscription(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->warning->setWordWrap(true);
+
+    connect(ui->avatar, &QPushButton::clicked, [this](){
+        m_PathAvatar = QFileDialog::getOpenFileName(this,
+               tr("Choose Image"), "", tr("Image Files (*.png *.jpg *.bmp)"));
+        ui->pathavatar->setText("Avatar: "+m_PathAvatar);
+    });
 }
 
 bool ViewInscription::VerifySignupInformations()
@@ -20,8 +27,6 @@ bool ViewInscription::VerifySignupInformations()
     QString email = ui->adrmail->text();
     QString idf = ui->identifiant->text();
     QString mdp = ui->mdp->text();
-    QString nom = ui->nom->text();
-    QString prenom = ui->prenom->text();
 
     // Si l'email, l'identifiant et le mdp ne sont pas vides alors
     if (!idf.isEmpty() && !email.isEmpty() && !mdp.isEmpty()){
@@ -76,16 +81,39 @@ void ViewInscription::FinishSignup()
 
     // Appele notre gestionnaire de base de données et effectue
     // une requête pour insérer le nouvel utilisateur.
-    DatabaseManager::GetInstance().
-        Exec(
-                "INSERT INTO utilisateurs (identifiant, nom, prenom, email, motdepass)"
-                "VALUES ('%s', '%s', '%s', '%s', '%s');",
-                idf.toLocal8Bit().constData(),
-                nom.toLocal8Bit().constData(),
-                prenom.toLocal8Bit().constData(),
-                email.toLocal8Bit().constData(),
-                mdp_hashed.toLocal8Bit().constData()
-        );
+    if (m_PathAvatar != ""){
+        QFile img(m_PathAvatar);
+
+        if (!img.open(QIODevice::ReadOnly)) {
+            ui->warning->setText("ERROR: Impossible d'ouvrir l'image que vous avez sélectionnée comme avatar.");
+                return;
+        }
+
+        QByteArray buffer_byte_array = img.readAll();
+        DatabaseManager::GetInstance().
+            Prepare(
+                    "INSERT INTO utilisateurs (identifiant, nom, prenom, email, motdepass, avatar)"
+                    "VALUES ('%s', '%s', '%s', '%s', '%s', :imageData);",
+                    idf.toLocal8Bit().constData(),
+                    nom.toLocal8Bit().constData(),
+                    prenom.toLocal8Bit().constData(),
+                    email.toLocal8Bit().constData(),
+                    mdp_hashed.toLocal8Bit().constData()
+            );
+        DatabaseManager::GetInstance().BindValue(":imageData", buffer_byte_array);
+        DatabaseManager::GetInstance().Exec();
+    }else{
+        DatabaseManager::GetInstance().
+            Exec(
+                    "INSERT INTO utilisateurs (identifiant, nom, prenom, email, motdepass, avatar)"
+                    "VALUES ('%s', '%s', '%s', '%s', '%s', NULL);",
+                    idf.toLocal8Bit().constData(),
+                    nom.toLocal8Bit().constData(),
+                    prenom.toLocal8Bit().constData(),
+                    email.toLocal8Bit().constData(),
+                    mdp_hashed.toLocal8Bit().constData()
+            );
+    }
 
     // Petite fenêtre pour informer l'utilisateur que tout va bien et
     // qu'il s'est enregistré avec succès

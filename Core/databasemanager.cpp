@@ -24,7 +24,8 @@ void DatabaseManager::InitilizeDatabase()
         "nom varchar(20), "
         "prenom varchar(20), "
         "email varchar(64),"
-        "motdepass varchar(64)"
+        "motdepass varchar(64),"
+        "avatar BOLB"
         ");"
     );
 
