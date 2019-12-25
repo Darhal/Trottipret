@@ -162,6 +162,9 @@ void ViewListeTrottinette::OnRowSelection()
         QPixmap img_pixmap = QPixmap();
         img_pixmap.loadFromData( std::move(image_bytes) );
         ui->imageTrotti->setPixmap(img_pixmap);
+    }else{
+        QPixmap img_pixmap = QPixmap(":/Resources/Images/trotinette.png");
+        ui->imageTrotti->setPixmap(img_pixmap);
     }
 }
 
