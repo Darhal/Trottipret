@@ -14,6 +14,7 @@ ViewInscription::ViewInscription(QWidget *parent) :
     ui->setupUi(this);
     ui->warning->setWordWrap(true);
 
+    // Handle logic of avatar selection
     connect(ui->avatar, &QPushButton::clicked, [this](){
         m_PathAvatar = QFileDialog::getOpenFileName(this,
                tr("Choose Image"), "", tr("Image Files (*.png *.jpg *.bmp)"));
@@ -65,7 +66,6 @@ void ViewInscription::on_buttonBox_accepted()
 void ViewInscription::FinishSignup()
 {
     // A cette etape toutes les informations sont correctes
-
     // Recupere les informations
     QString email = ui->adrmail->text();
     QString idf = ui->identifiant->text();
@@ -81,15 +81,16 @@ void ViewInscription::FinishSignup()
 
     // Appele notre gestionnaire de base de données et effectue
     // une requête pour insérer le nouvel utilisateur.
-    if (m_PathAvatar != ""){
-        QFile img(m_PathAvatar);
+    if (m_PathAvatar != ""){ // if he selected an avatar
+        QFile img(m_PathAvatar); // open the file
 
-        if (!img.open(QIODevice::ReadOnly)) {
+        if (!img.open(QIODevice::ReadOnly)) { // handle errors
             ui->warning->setText("ERROR: Impossible d'ouvrir l'image que vous avez sélectionnée comme avatar.");
                 return;
         }
 
-        QByteArray buffer_byte_array = img.readAll();
+        QByteArray buffer_byte_array = img.readAll(); // rea dall bytes
+        // prepare the execution of a db querry
         DatabaseManager::GetInstance().
             Prepare(
                     "INSERT INTO utilisateurs (identifiant, nom, prenom, email, motdepass, avatar)"
@@ -100,9 +101,12 @@ void ViewInscription::FinishSignup()
                     email.toLocal8Bit().constData(),
                     mdp_hashed.toLocal8Bit().constData()
             );
+        // bind ':imageData' to buffer array
         DatabaseManager::GetInstance().BindValue(":imageData", buffer_byte_array);
+        // run the command
         DatabaseManager::GetInstance().Exec();
     }else{
+        // there is no image here so run the command straight away
         DatabaseManager::GetInstance().
             Exec(
                     "INSERT INTO utilisateurs (identifiant, nom, prenom, email, motdepass, avatar)"

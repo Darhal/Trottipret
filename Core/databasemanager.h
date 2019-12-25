@@ -44,12 +44,30 @@ public:
     template<typename... Args>
     QSqlQuery& Exec(const char* statment, Args&&... args);
 
+    /**
+     * @fn Prepare
+     * @brief Fonction facilitant la preperation des requêtes sqlite avec des arguments variables de type different
+     * Ca sera utile pour les selects et les inserts
+     * @param const char* statment
+     * @param template Args&&... args
+     * @return QSqlQuery
+    */
     template<typename... Args>
     QSqlQuery& Prepare(const char* statment, Args&&... args);
 
+    /**
+     * @fn Prepare
+     * @brief FOnction utilité qui bind les values pour la BD
+     * @param const QString& label
+     * @param const T& value
+    */
     template<typename T>
     void BindValue(const QString& label, const T& value);
 
+    /**
+     * @fn Exec
+     * @brief FOnction utilité pour executer les requet SQL
+    */
     void Exec();
 
     /**

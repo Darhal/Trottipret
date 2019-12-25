@@ -8,16 +8,36 @@ namespace Ui {
 class ViewAddTrottinette;
 }
 
+
+/**
+ * @brief The ViewAddTrottinette class used to show the window for adding trottinette
+ */
 class ViewAddTrottinette : public QDialog
 {
     Q_OBJECT
 
 public:
+    /**
+     * @brief ViewAddTrottinette ctor
+     * @param parent
+     */
     explicit ViewAddTrottinette(QWidget *parent = 0);
+
+    /**
+     * brief ViewAddTrottinette dtor
+     */
     ~ViewAddTrottinette();
 
+
+    /**
+     * @brief VerifyData
+     * @return bool if data is correct or not
+     */
     bool VerifyData();
 
+    /**
+     * @brief SubmitData submit and sends the data
+     */
     void SubmitData();
 
 private slots:
@@ -27,7 +47,7 @@ private slots:
 
 private:
     Ui::ViewAddTrottinette *ui;
-    QString m_ImageFilePath;
+    QString m_ImageFilePath; // field used for the image of the trotti
 };
 
 #endif // VIEWADDTROTTINETTE_H

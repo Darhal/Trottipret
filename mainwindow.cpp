@@ -114,6 +114,7 @@ void MainWindow::OpenDialogWindow(int dialog_id)
 
 void MainWindow::ToggleButtons(bool b)
 {
+    // si vrai
     if (b){
         Utilisateur* cur_usr = ApplicationManager::GetInstance().GetCurrentUser();
 
@@ -121,14 +122,18 @@ void MainWindow::ToggleButtons(bool b)
             QSqlQuery& r = DatabaseManager::GetInstance()
                     .Exec("SELECT avatar FROM utilisateurs WHERE identifiant = '%s';", cur_usr->GetIdentifiant().toLocal8Bit().constData());
 
-            if (r.first() && r.value(0).toString() != ""){
+            if (r.first() && r.value(0).toString() != ""){ // If he have an avatar
+                // construct the image based ont he raw data (binaries)
                 QByteArray image_bytes = r.value(0).toByteArray();
                 QPixmap img_pixmap = QPixmap();
                 img_pixmap.loadFromData( std::move(image_bytes) );
+                // Set the label to have this image
                 ui->avatar->setPixmap(img_pixmap);
+                // Scale the image to fit the label
                 ui->avatar->setScaledContents( true );
                 ui->avatar->setSizePolicy( QSizePolicy::Ignored, QSizePolicy::Ignored );
-            }else{
+            }else{ // otherwise
+                // LOad and set the default avatar that can be found in resources
                 QPixmap img_pixmap = QPixmap(":/Resources/Images/user.png");
                 ui->avatar->setPixmap(img_pixmap);
                 ui->avatar->setScaledContents( true );
@@ -136,12 +141,14 @@ void MainWindow::ToggleButtons(bool b)
             }
         }
 
+        // Update the label
         ui->connected_user->setStyleSheet("color:#0091EA;"
                                           "font: bold;"
                                           "font-size:13px;");
         ui->connected_user->setText(QString("  Connecté, utilisateur actuel: %1.").arg(cur_usr->GetIdentifiant()));
         ui->connected_user->setAlignment(Qt::AlignLeft);
     }else{
+        // If the user is desconnected then set the annoynmous image
         QPixmap img_pixmap = QPixmap(":/Resources/Images/anonymous.png");
         ui->avatar->setPixmap(img_pixmap);
         ui->avatar->setScaledContents( true );
@@ -154,12 +161,14 @@ void MainWindow::ToggleButtons(bool b)
     }
 
 
+    // Enable the buttons when we are logged in
     ui->ListOffreLocButton->setEnabled(b);
     ui->ListeTrottiButton->setEnabled(b);
     ui->ActiveLocationButton->setEnabled(b);
     ui->MyProfile->setEnabled(b);
     ui->LogOut->setEnabled(b);
 
+    // Inverse the logic
     ui->ConnectionButton->setEnabled(!b);
     ui->InscriptionButton->setEnabled(!b);
 }

@@ -55,8 +55,18 @@ public:
     */
     Ui::MainWindow* GetUI() {return ui;}
 
+    /**
+     * @brief Function that will be called when we press the red X to close the window
+     * @param  QCloseEvent* event
+     * @return void
+    */
     void closeEvent(QCloseEvent* event) override;
 
+    /**
+     * @brief Function that will handle the logic when the user is logged in or logged out
+     * @param  bool b indicating wether there is user connected or not
+     * @return void
+    */
     void ToggleButtons(bool b);
 
 private slots:

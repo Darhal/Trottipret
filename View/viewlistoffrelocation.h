@@ -7,10 +7,16 @@ namespace Ui {
 class ViewListOffreLocation;
 }
 
+/**
+ * @brief The ViewListOffreLocation class
+ */
 class ViewListOffreLocation : public QDialog
 {
     Q_OBJECT
 
+    /**
+     * @brief The Cols enum
+     */
     enum Cols {
         REF = 0,
         DATE_DEBUT = 1,
@@ -21,9 +27,16 @@ class ViewListOffreLocation : public QDialog
     };
 
 public:
+    /**
+     * @brief ViewListOffreLocation
+     * @param parent
+     */
     explicit ViewListOffreLocation(QWidget *parent = 0);
     ~ViewListOffreLocation();
 
+    /**
+     * @brief RefreshList
+     */
     void RefreshList();
 
 private:

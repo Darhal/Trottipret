@@ -10,12 +10,26 @@
 class ApplicationManager
 {
 public:
+    /**
+     * @brief Function to get the instance of the app manager
+     * @return ApplicationManager&
+    */
     static ApplicationManager& GetInstance();
 
+    /**
+     * @brief Function to free the data used by the application manager
+    */
     static void Free();
 
+    /**
+     * @brief Function boot up the application
+    */
     void StartApplication();
 
+    /**
+     * @brief Used to set the current connected user
+     * @arg Utilisateur*
+    */
     void SetCurrentUser(Utilisateur* user);
 
     Utilisateur* GetCurrentUser() { return m_CurrentUser; }

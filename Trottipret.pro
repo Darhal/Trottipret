@@ -32,7 +32,6 @@ FORMS += \
     View/viewalloffre.ui \
     View/viewconnection.ui \
     View/viewinscription.ui \
-    View/viewlisteoffre.ui \
     View/viewlistetrottinette.ui \
     View/viewlistoffrelocation.ui \
     View/viewlocations.ui \
@@ -51,7 +50,6 @@ HEADERS += \
     View/viewalloffre.h \
     View/viewconnection.h \
     View/viewinscription.h \
-    View/viewlisteoffre.h \
     View/viewlistetrottinette.h \
     View/viewlistoffrelocation.h \
     View/viewlocations.h \
@@ -71,7 +69,6 @@ SOURCES += \
     View/viewalloffre.cpp \
     View/viewconnection.cpp \
     View/viewinscription.cpp \
-    View/viewlisteoffre.cpp \
     View/viewlistetrottinette.cpp \
     View/viewlistoffrelocation.cpp \
     View/viewlocations.cpp \
