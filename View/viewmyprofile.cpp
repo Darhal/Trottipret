@@ -36,7 +36,7 @@ ViewMyProfile::ViewMyProfile(QWidget *parent) :
             img_pixmap.loadFromData( std::move(image_bytes) );
             this->SetAvatarPicture(img_pixmap);
         }else{
-            QPixmap img_pixmap = QPixmap("Images/user.png");
+            QPixmap img_pixmap = QPixmap(":/Resources/Images/user.png");
             this->SetAvatarPicture(img_pixmap);
         }
     }
